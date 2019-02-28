@@ -43,6 +43,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -88,11 +94,59 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\plugins.css" />
+    <Content Include="css\style.css" />
     <Content Include="Global.asax" />
+    <Content Include="images\logo1.png" />
+    <Content Include="images\uploads\ads1.png" />
+    <Content Include="images\uploads\ads2.png" />
+    <Content Include="images\uploads\ava1.jpg" />
+    <Content Include="images\uploads\ava2.jpg" />
+    <Content Include="images\uploads\ava3.jpg" />
+    <Content Include="images\uploads\ava4.jpg" />
+    <Content Include="images\uploads\blog-it1.jpg" />
+    <Content Include="images\uploads\blog-it2.jpg" />
+    <Content Include="images\uploads\drop-icon.png" />
+    <Content Include="images\uploads\ft-bg.jpg" />
+    <Content Include="images\uploads\mv-item1.jpg" />
+    <Content Include="images\uploads\mv-item2.jpg" />
+    <Content Include="images\uploads\mv-item3.jpg" />
+    <Content Include="images\uploads\mv-item4.jpg" />
+    <Content Include="images\uploads\mv-item5.jpg" />
+    <Content Include="images\uploads\mv-item6.jpg" />
+    <Content Include="images\uploads\mv-item7.jpg" />
+    <Content Include="images\uploads\mv-item8.jpg" />
+    <Content Include="images\uploads\search-bg.png" />
+    <Content Include="images\uploads\slider-bg.jpg" />
+    <Content Include="images\uploads\slider1.jpg" />
+    <Content Include="images\uploads\slider2.jpg" />
+    <Content Include="images\uploads\slider3.jpg" />
+    <Content Include="images\uploads\slider4.jpg" />
+    <Content Include="images\uploads\topsearch.png" />
+    <Content Include="images\uploads\trailer2.jpg" />
+    <Content Include="images\uploads\trailer3.png" />
+    <Content Include="images\uploads\trailer4.png" />
+    <Content Include="images\uploads\trailer5.jpg" />
+    <Content Include="images\uploads\trailer6.jpg" />
+    <Content Include="images\uploads\trailer7.jpg" />
+    <Content Include="js\custom.js" />
+    <Content Include="js\jquery.js" />
+    <Content Include="js\plugins.js" />
+    <Content Include="js\plugins2.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -100,7 +154,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
     <None Include="packages.config" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Login\Register.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -110,8 +170,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Imdb.BLL\Imdb.BLL.csproj">
+      <Project>{e1e16c09-be48-4808-91b3-8a97c5afc4e8}</Project>
+      <Name>Imdb.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Imdb.DAL\Imdb.DAL.csproj">
+      <Project>{96324544-1313-41de-98bd-c8418f575b65}</Project>
+      <Name>Imdb.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Imdb.DATA\Imdb.DATA.csproj">
+      <Project>{7f8526c0-6576-4412-9563-c3c8cddb83e9}</Project>
+      <Name>Imdb.DATA</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
