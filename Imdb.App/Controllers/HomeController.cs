@@ -18,7 +18,8 @@ namespace Imdb.App.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(db.MoviesSeries.ToList());
+            return View();
+            //return View(db.MoviesSeries.ToList());
         }
 
         // GET: Home/Details/5
