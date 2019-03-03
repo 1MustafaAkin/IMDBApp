@@ -12,7 +12,6 @@ namespace Imdb.DATA.Concrete
         public int MoviesSeriesWatchListID { get; set; }
         public int MoviesSeriesID { get; set; }
         public int WatchListID { get; set; }
-
         public virtual MoviesSeries MoviesSeries { get; set; }
         public virtual WatchList WatchList { get; set; }
         public virtual WatchState WatchState { get; set; }

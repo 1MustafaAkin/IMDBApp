@@ -16,7 +16,7 @@ namespace Imdb.DAL.Mapping
 
             Property(x => x.MovieSeriesName).HasMaxLength(30).IsRequired();
             Property(x => x.Description).HasMaxLength(150).IsRequired();
-            Property(x => x.ReleaseDate).HasColumnType("datetime2");
+            Property(x => x.ReleaseDate).HasColumnType("datetime2").IsOptional();
             Property(x => x.Duration).HasColumnType("smallint");
             Property(x => x.Trailer).HasMaxLength(250).IsRequired();
             Property(x => x.Photos).HasMaxLength(250).IsRequired();

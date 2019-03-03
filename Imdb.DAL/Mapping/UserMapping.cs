@@ -22,8 +22,9 @@ namespace Imdb.DAL.Mapping
             Property(x => x.Gender).HasColumnType("bit").IsOptional();
             Property(x => x.Email).HasMaxLength(50).IsRequired();
             Property(x => x.Avatar).HasMaxLength(250);
-
             HasRequired(x => x.WatchList).WithRequiredPrincipal(x => x.User);
+
+            
         }
     }
 }

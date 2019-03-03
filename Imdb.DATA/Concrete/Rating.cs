@@ -16,7 +16,6 @@ namespace Imdb.DATA.Concrete
         public int UserID { get; set; }
         public int MoviesSeriesID { get; set; }
 
-
         public virtual User User { get; set; }
         public virtual MoviesSeries RatingOfMovieSeries { get; set; }
 

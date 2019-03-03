@@ -19,6 +19,7 @@ namespace Imdb.BLL.ValidationRules
             RuleFor(p => p.Duration).NotEmpty().WithMessage("Film Süresi Boş Olamaz");
             RuleFor(p => p.Trailer).NotEmpty().WithMessage("Trailer Boş Olamaz");
             RuleFor(p => p.Photos).NotEmpty().WithMessage("Film Posteri Boş Olamaz");
+
         }
 
     }

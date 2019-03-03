@@ -1,5 +1,6 @@
 ﻿using Imdb.DAL.Mapping;
 using Imdb.DATA.Concrete;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,13 +11,17 @@ using System.Threading.Tasks;
 
 namespace Imdb.DAL
 {
-    public class Context:DbContext
+    public class Context:IdentityDbContext<ApplicationUser>
     {
-        public Context() : base(@"server = (localdb)\MSSQLLocalDB; database = Imdb; Trusted_Connection=True;")
+        public static Context Create()
         {
-
+            return new Context();
         }
-
+        public Context():base("DefaultContext")
+        {
+            //Database.Connection.ConnectionString = @"server = (localdb)\MSSQLLocalDB; database = Imdb; Trusted_Connection=True;";
+        }
+        
         public DbSet<Categories> Category { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<Employee> Employee { get; set; }
