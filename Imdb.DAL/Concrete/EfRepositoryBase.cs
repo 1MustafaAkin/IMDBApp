@@ -44,7 +44,7 @@ namespace Imdb.DAL.Concrete
             {
                 //Entry insert , update , delete  için ilgili nesneye erişebilecek kodu yazabiliyoruz
                 var updatedEntity = db.Entry(entity);
-                //Modified yani bu entity var veritabanında ona abone ol ve durmunu update olarak yani kısacası update kodu çalışacak
+                //Modified yani bu entity var veritabanında ona abone ol ve durmunu update olarak işaretle yani kısacası update kodu çalışacak
                 updatedEntity.State = EntityState.Modified;
                 db.SaveChanges();
             }
