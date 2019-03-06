@@ -67,11 +67,22 @@
                         <li><a href="#">Suggest Me Something</a></li>
                     </ul>
                     <ul class="nav navbar-nav flex-child-menu menu-right">
-                        <li><a href="#">Help</a></li>
-                        <li>
-                        @Html.ActionLink("Login","Login","Account")
-                        </li>
-                        <li class="btn signupLink"><a href="#">sign up</a></li>
+                        @{
+                            <li><a href="#">Help</a></li>
+                            if (Session["OnlineKullanici"] == null)
+                            {
+                                <li>
+                                    @Html.ActionLink("Login", "Login", "Account")
+                                </li>
+                                <li class="btn signupLink"><a href="#">sign up</a></li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink(Session["OnlineKullanici"].ToString(), "", "")</li>
+                                <li>@Html.ActionLink("Logout", "Index", "Home")</li>
+                                Session["OnlineKullanici"] = null;
+                            }
+                        }
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->

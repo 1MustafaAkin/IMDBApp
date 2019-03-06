@@ -50,7 +50,7 @@ namespace Imdb.App.Models
     {
         [Required]
         [Display(Name = "Email")]
-        [EmailAddress]
+        //[EmailAddress]
         public string Email { get; set; }
 
         [Required]

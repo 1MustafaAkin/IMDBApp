@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Imdb.App.Models;
 using Imdb.DATA.Concrete;
+using Imdb.BLL.Abstract;
+using Imdb.BLL.DependencyResolver.Ninject;
 
 namespace Imdb.App.Controllers
 {
@@ -18,9 +20,11 @@ namespace Imdb.App.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IUserService _userService;
 
         public AccountController()
         {
+            _userService = InstanceFactory.GetInstance<IUserService>();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -80,6 +84,10 @@ namespace Imdb.App.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    Session["OnlineKullanici"] = model.Email;
+                    //Burada user.role den çekebiliyoruz adminse başka sayafaya yönlendirme burada olacak
+                    //ApplicationUser user = new ApplicationUser();
+                    
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -392,6 +400,7 @@ namespace Imdb.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            Session["OnlineKullanici"] = null;
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

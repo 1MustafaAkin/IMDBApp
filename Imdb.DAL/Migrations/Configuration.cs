@@ -37,13 +37,13 @@ namespace Imdb.DAL.Migrations
             var userStore = new UserStore<ApplicationUser>(db);
             var userManager = new UserManager<ApplicationUser>(userStore);
 
-            var adminUser = userManager.FindByName("admin@admin.com");
+            var adminUser = userManager.FindByName("admin");
             if (adminUser == null)
             {
                 adminUser = new ApplicationUser()
                 {
-                    UserName = "admin@admin.com",
-                    Email = "admin@admin.com"
+                    UserName = "admin",
+                    Email = "admin"
                 };
                 userManager.Create(adminUser, "Mustafa1.");
             }

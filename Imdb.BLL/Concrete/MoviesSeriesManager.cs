@@ -13,7 +13,7 @@ namespace Imdb.BLL.Concrete
 {
     public class MoviesSeriesManager : IMoviesSeriesService
     {
-        IMoviesSeriesDal _moviesSeriesDal;
+        private IMoviesSeriesDal _moviesSeriesDal;
 
         public MoviesSeriesManager(IMoviesSeriesDal moviesSeriesDal)
         {
