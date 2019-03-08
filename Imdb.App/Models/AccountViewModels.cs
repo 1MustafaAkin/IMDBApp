@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Imdb.DATA.Concrete;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Imdb.App.Models
@@ -65,7 +66,7 @@ namespace Imdb.App.Models
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
+        //[EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
@@ -79,6 +80,9 @@ namespace Imdb.App.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public virtual User User { get; set; }
+        
     }
 
     public class ResetPasswordViewModel

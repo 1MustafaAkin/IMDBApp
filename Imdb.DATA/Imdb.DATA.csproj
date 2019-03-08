@@ -67,7 +67,6 @@
     <Compile Include="Concrete\Rating.cs" />
     <Compile Include="Concrete\Roles.cs" />
     <Compile Include="Concrete\Season.cs" />
-    <Compile Include="Concrete\Title.cs" />
     <Compile Include="Concrete\User.cs" />
     <Compile Include="Concrete\WatchList.cs" />
     <Compile Include="Concrete\WatchState.cs" />

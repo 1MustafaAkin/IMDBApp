@@ -99,7 +99,6 @@
     <Compile Include="Mapping\RatingMapping.cs" />
     <Compile Include="Mapping\RolesMapping.cs" />
     <Compile Include="Mapping\SeasonMapping.cs" />
-    <Compile Include="Mapping\TitleMapping.cs" />
     <Compile Include="Mapping\UserMapping.cs" />
     <Compile Include="Mapping\WatchListMapping.cs" />
     <Compile Include="Mapping\WatchStateMapping.cs" />

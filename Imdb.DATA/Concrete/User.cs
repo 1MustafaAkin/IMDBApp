@@ -21,11 +21,9 @@ namespace Imdb.DATA.Concrete
         public string Email { get; set; }
         public string Avatar { get; set; }
 
-        public int TitleID { get; set; }
 
 
-        //public virtual ApplicationUser ApplicationUser { get; set; }
-        public virtual Title Title { get; set; }
+        public virtual List<ApplicationUser> ApplicationUser { get; set; }
         public virtual WatchList WatchList { get; set; }
         public virtual List<Rating> Ratings { get; set; }
     }

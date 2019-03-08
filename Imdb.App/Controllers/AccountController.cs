@@ -162,10 +162,21 @@ namespace Imdb.App.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    User userConcrete = new User();
+                    userConcrete.UserName = model.Email;
+                    userConcrete.Password = model.Password;
+                    userConcrete.FirstName = model.User.FirstName;
+                    userConcrete.LastName = model.User.LastName;
+                    userConcrete.Email = model.User.Email;
+                    //_userService.Add(userConcrete);
+                    user.User = userConcrete;
+                    if (!UserManager.IsInRole(user.Id, "admin"))
+                        UserManager.AddToRole(user.Id, "normal");
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

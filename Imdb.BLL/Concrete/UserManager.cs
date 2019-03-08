@@ -33,11 +33,12 @@ namespace Imdb.BLL.Concrete
             return _userDal.GetAll();
         }
 
-        public List<User> GetUsersByTitle(int titleId)
-        {
-            //Expression lu ifadeleri burada kullandık getAll fonksiyonuna linq sorgusu gönderdik, yani parametresiz göndererek tüm userları çekebildğimiz gibi linq sorgusu göndererek sorguya göre çekmeyide yapmış olduk
-            return _userDal.GetAll(x => x.TitleID == titleId);
-        }
+        //TODO
+        //public List<User> GetUsersByTitle(int titleId)
+        //{
+        //    //Expression lu ifadeleri burada kullandık getAll fonksiyonuna linq sorgusu gönderdik, yani parametresiz göndererek tüm userları çekebildğimiz gibi linq sorgusu göndererek sorguya göre çekmeyide yapmış olduk
+        //    return _userDal.GetAll(x => x.TitleID == titleId);
+        //}
 
         public List<User> GetUsersByUserName(string userName)
         {

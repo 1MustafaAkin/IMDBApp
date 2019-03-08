@@ -33,7 +33,6 @@ namespace Imdb.DAL
         public DbSet<Rating> Rating { get; set; }
         public DbSet<Roles> Role { get; set; }
         public DbSet<Season> Season { get; set; }
-        public DbSet<Title> Title { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<WatchList> WatchList { get; set; }
         public DbSet<WatchState> WatchState { get; set; }
@@ -51,7 +50,6 @@ namespace Imdb.DAL
             modelBuilder.Configurations.Add(new RatingMapping());
             modelBuilder.Configurations.Add(new RolesMapping());
             modelBuilder.Configurations.Add(new SeasonMapping());
-            modelBuilder.Configurations.Add(new TitleMapping());
             modelBuilder.Configurations.Add(new UserMapping());
             modelBuilder.Configurations.Add(new WatchListMapping());
             modelBuilder.Configurations.Add(new WatchStateMapping());
