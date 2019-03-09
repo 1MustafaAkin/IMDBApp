@@ -13,16 +13,18 @@ namespace Imdb.DAL.Concrete
     public class EfRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
-    {
+    {   
+        
         public void Add(TEntity entity)
         {
             using (TContext db = new TContext())
-            {
+            {   
                 //Entry insert , update , delete  için ilgili nesneye erişebilecek kodu yazabiliyoruz
                 var addedEntity = db.Entry(entity);
                 //Yeni oluşan bu nesneyi veritabanında bulamayacağımız için bunu yeni eklenecek olarak işaretliyoruz
                 addedEntity.State = EntityState.Added;
                 db.SaveChanges();
+                db.Dispose();
             }
         }
 
@@ -35,6 +37,7 @@ namespace Imdb.DAL.Concrete
                 //Deleted yani entitye abone ol onu silincek diye işaretle kısacısı delete kodunu çalıştıracak
                 deletedEntity.State = EntityState.Deleted;
                 db.SaveChanges();
+                db.Dispose();
             }
         }
 
@@ -47,6 +50,7 @@ namespace Imdb.DAL.Concrete
                 //Modified yani bu entity var veritabanında ona abone ol ve durmunu update olarak işaretle yani kısacası update kodu çalışacak
                 updatedEntity.State = EntityState.Modified;
                 db.SaveChanges();
+                db.Dispose();
             }
         }
 

@@ -16,7 +16,6 @@ namespace Imdb.App.Controllers
 {
     public class MoviesSeriesController : Controller
     {
-        private Context db = new Context();
 
         public MoviesSeriesController()
         {
@@ -130,13 +129,16 @@ namespace Imdb.App.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {   
+                
+        //        //db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }
