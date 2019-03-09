@@ -24,5 +24,9 @@ namespace Imdb.DAL.Abstract
 
         void Delete(T entity);
 
+        IEnumerable<T> GetAllWithInclude(Expression<Func<T, bool>> filter, params string[] include);
+
+
+
     }
 }

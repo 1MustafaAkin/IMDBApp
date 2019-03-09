@@ -19,6 +19,7 @@ namespace Imdb.DAL
         }
         public Context():base("DefaultContext")
         {
+            Configuration.LazyLoadingEnabled = false;
             //Database.Connection.ConnectionString = @"server = (localdb)\MSSQLLocalDB; database = Imdb; Trusted_Connection=True;";
         }
         

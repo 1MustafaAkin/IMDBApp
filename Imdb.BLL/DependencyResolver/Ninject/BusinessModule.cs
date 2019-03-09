@@ -16,13 +16,23 @@ namespace Imdb.BLL.DependencyResolver.Ninject
     {
         public override void Load()
         {
-            //Bir yerden IProductService istenirse  ona ProductManager sınıfını döndür.Yani somut bir product manager oluştur ve onu IProductService ver
+            //Bir yerden IUserService istenirse  ona UserManager sınıfını döndür.Yani somut bir user manager oluştur ve onu IUserService'e ver
             //Birde burada Bu tip sınıflar için bir kere üretildiğinde bir daha üretilmesin diye InSingletonScope 
-            Bind<IUserService>().To<UserManager>().InSingletonScope(); // burda kullanıcı ProductService isterse ProductManager ı new leyip veriyoruz    
+            // burda kullanıcı IUserService isterse ProductManager ı new leyip veriyoruz    
+            Bind<IUserService>().To<UserManager>().InSingletonScope(); 
             Bind<IUserDal>().To<EfUserDal>().InSingletonScope();
 
             Bind<IMoviesSeriesService>().To<MoviesSeriesManager>().InSingletonScope();
             Bind<IMoviesSeriesDal>().To<EfMoviesSeriesDal>().InSingletonScope();
+
+            Bind<IEmployeeService>().To<EmployeeManager>().InSingletonScope();
+            Bind<IEmployeeDal>().To<EfEmployeeDal>().InSingletonScope();
+
+            Bind<ICountryService>().To<CountryManager>().InSingletonScope();
+            Bind<ICountryDal>().To<EfCountryDal>().InSingletonScope();
+
+            Bind<IRoleService>().To<RoleManager>().InSingletonScope();
+            Bind<IRoleDal>().To<EfRolesDal>().InSingletonScope();
             //Bind<ICategoryService>().To<CategoryManager>().InSingletonScope();
             //Bind<ICategoryDal>().To<EfCategoryDal>().InSingletonScope();
         }

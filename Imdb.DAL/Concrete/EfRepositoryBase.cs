@@ -18,7 +18,7 @@ namespace Imdb.DAL.Concrete
         public void Add(TEntity entity)
         {
             using (TContext db = new TContext())
-            {   
+            {
                 //Entry insert , update , delete  için ilgili nesneye erişebilecek kodu yazabiliyoruz
                 var addedEntity = db.Entry(entity);
                 //Yeni oluşan bu nesneyi veritabanında bulamayacağımız için bunu yeni eklenecek olarak işaretliyoruz
@@ -76,6 +76,21 @@ namespace Imdb.DAL.Concrete
                 //return db.User.SingleOrDefault(filter);
 
                 return db.Set<TEntity>().SingleOrDefault(filter);
+            }
+        }
+
+        //İlişkili tabloları çekmek için db.Include kodu gerekli bu yüzden eğer birden fazla tablo ile ilişkisi varsa burda params tan include edilecek tablolarda gezip include etmiş oluyoruz.
+        public IEnumerable<TEntity> GetAllWithInclude(Expression<Func<TEntity, bool>> filter, params string[] include)
+        {
+            using (TContext db = new TContext())
+            {
+                IQueryable<TEntity> query = db.Set<TEntity>();
+                foreach (string inc in include)
+                {
+                    query = query.Include(inc);
+                }
+
+                return filter == null ? query.ToList() : query.Where(filter).ToList();
             }
         }
     }
