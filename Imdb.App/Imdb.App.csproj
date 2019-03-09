@@ -225,6 +225,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Views\MoviesSeries\Create.cshtml" />
+    <Content Include="Views\MoviesSeries\Delete.cshtml" />
+    <Content Include="Views\MoviesSeries\Details.cshtml" />
+    <Content Include="Views\MoviesSeries\Edit.cshtml" />
+    <Content Include="Views\MoviesSeries\Index.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -261,8 +266,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MoviesSeriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,7 +281,6 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
-    <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

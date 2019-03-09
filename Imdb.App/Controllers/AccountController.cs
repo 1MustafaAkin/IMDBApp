@@ -81,14 +81,16 @@ namespace Imdb.App.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var user = UserManager.Find(model.Email, model.Password);
+            string roleName = UserManager.GetRoles(user.Id).FirstOrDefault();
             switch (result)
-            {
+            {   
                 case SignInStatus.Success:
                     Session["OnlineKullanici"] = model.Email;
-                    //Burada user.role den çekebiliyoruz adminse başka sayafaya yönlendirme burada olacak
-                    //ApplicationUser user = new ApplicationUser();
-                    
-                    return RedirectToLocal(returnUrl);
+                    if (roleName != "admin")
+                        return RedirectToLocal(returnUrl);
+                    else
+                        return RedirectToAction("Index", "MoviesSeries");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -172,11 +174,11 @@ namespace Imdb.App.Controllers
                     userConcrete.FirstName = model.User.FirstName;
                     userConcrete.LastName = model.User.LastName;
                     userConcrete.Email = model.User.Email;
-                    //_userService.Add(userConcrete);
                     user.User = userConcrete;
+                    
                     if (!UserManager.IsInRole(user.Id, "admin"))
                         UserManager.AddToRole(user.Id, "normal");
-
+                    Session["OnlineKullanici"] = user.Email;
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -411,8 +413,9 @@ namespace Imdb.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            Session["OnlineKullanici"] = null;
+            
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session["OnlineKullanici"] = null;
             return RedirectToAction("Index", "Home");
         }
 

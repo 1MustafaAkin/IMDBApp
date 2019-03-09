@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Imdb.DATA.Concrete.MoviesSeries>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieSeriesName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trailer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsSeries)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MovieSeriesName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReleaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Trailer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Photos)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsSeries)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MovieSeriesID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MovieSeriesID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MovieSeriesID })
+        </td>
+    </tr>
+}
+
+</table>

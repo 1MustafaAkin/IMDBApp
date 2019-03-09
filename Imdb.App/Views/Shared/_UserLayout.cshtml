@@ -24,9 +24,13 @@
     <!-- CSS files -->
     <link rel="stylesheet" href="../../Content/css/plugins.css">
     <link rel="stylesheet" href="../../Content/css/style.css">
-    <style type="text/css">.fancybox-margin{margin-right:17px;}</style>
+    <style type="text/css">
+        .fancybox-margin {
+            margin-right: 17px;
+        }
+    </style>
 </head>
-<body class="openform" >
+<body class="openform">
     <div id="preloader">
         <img class="logo" src="../../Content/images/logo1.png" alt="" width="119" height="58">
         <div id="status">
@@ -36,8 +40,6 @@
     </div>
     <!--end of preloading-->
     <!--login form popup-->
-
-
     <!--end of signup form popup-->
     <header class="ht-header">
         <div class="container">
@@ -74,13 +76,13 @@
                                 <li>
                                     @Html.ActionLink("Login", "Login", "Account")
                                 </li>
-                                <li class="btn signupLink"><a href="#">sign up</a></li>
+                                <li>@Html.ActionLink("Sign Up", "Register", "Account")</li>
                             }
                             else
                             {
-                                <li>@Html.ActionLink(Session["OnlineKullanici"].ToString(), "", "")</li>
-                                <li>@Html.ActionLink("Logout", "Index", "Home")</li>
-                                Session["OnlineKullanici"] = null;
+                                @*<li>@Html.ActionLink(Session["OnlineKullanici"].ToString(), "", "")</li>
+                <li>@Html.ActionLink("Logout", "Index", "Home")</li>*@
+                                @Html.Partial("_LoginPartial")
                             }
                         }
                     </ul>

@@ -810,7 +810,21 @@
                             }
                         </div>
                         <div class="slider-nav-2 thumb-ft">
-                            <div class="item">
+                            @{ 
+                                foreach (var item in Model)
+                                {
+                                    <div class="item">
+                                <div class="trailer-img">
+                                    <img src="@Url.Content(item.Photos)" alt="photo by Barn Images" width="4096" height="2737">
+                                </div>
+                                <div class="trailer-infor">
+                                    <h4 class="desc">@item.MovieSeriesName</h4>
+                                    <p>2:30</p>
+                                </div>
+                            </div>
+                                }
+                            }
+                            @*<div class="item">
                                 <div class="trailer-img">
                                     <img src="../../Content/images/uploads/trailer7.jpg" alt="photo by Barn Images" width="4096" height="2737">
                                 </div>
@@ -863,7 +877,7 @@
                                     <h4 class="desc">Fast&Furious 8</h4>
                                     <p>3:11</p>
                                 </div>
-                            </div>
+                            </div>*@
 
                         </div>
                     </div>
