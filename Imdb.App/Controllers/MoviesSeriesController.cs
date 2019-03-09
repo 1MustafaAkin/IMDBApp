@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using Imdb.BLL.Abstract;
+using Imdb.BLL.DependencyResolver.Ninject;
 using Imdb.DAL;
 using Imdb.DATA.Concrete;
 
@@ -15,10 +18,17 @@ namespace Imdb.App.Controllers
     {
         private Context db = new Context();
 
+        public MoviesSeriesController()
+        {
+            _moviesSeriesService = InstanceFactory.GetInstance<IMoviesSeriesService>();
+        }
+
+        private IMoviesSeriesService _moviesSeriesService;
+
         // GET: MoviesSeries
         public ActionResult Index()
         {
-            return View(db.MoviesSeries.ToList());
+            return View(_moviesSeriesService.GetAll());
         }
 
         // GET: MoviesSeries/Details/5
@@ -28,7 +38,7 @@ namespace Imdb.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MoviesSeries moviesSeries = db.MoviesSeries.Find(id);
+            MoviesSeries moviesSeries = _moviesSeriesService.GetMoviesSeriesById(id);
             if (moviesSeries == null)
             {
                 return HttpNotFound();
@@ -51,8 +61,7 @@ namespace Imdb.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.MoviesSeries.Add(moviesSeries);
-                db.SaveChanges();
+                _moviesSeriesService.Add(moviesSeries);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +75,7 @@ namespace Imdb.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MoviesSeries moviesSeries = db.MoviesSeries.Find(id);
+            MoviesSeries moviesSeries = _moviesSeriesService.GetMoviesSeriesById(id);
             if (moviesSeries == null)
             {
                 return HttpNotFound();
@@ -83,8 +92,7 @@ namespace Imdb.App.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(moviesSeries).State = EntityState.Modified;
-                db.SaveChanges();
+                _moviesSeriesService.Update(moviesSeries);
                 return RedirectToAction("Index");
             }
             return View(moviesSeries);
@@ -97,7 +105,7 @@ namespace Imdb.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MoviesSeries moviesSeries = db.MoviesSeries.Find(id);
+            MoviesSeries moviesSeries = _moviesSeriesService.GetMoviesSeriesById(id);
             if (moviesSeries == null)
             {
                 return HttpNotFound();
@@ -110,9 +118,15 @@ namespace Imdb.App.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MoviesSeries moviesSeries = db.MoviesSeries.Find(id);
-            db.MoviesSeries.Remove(moviesSeries);
-            db.SaveChanges();
+            try
+            {
+                MoviesSeries moviesSeries = _moviesSeriesService.GetMoviesSeriesById(id);
+                _moviesSeriesService.Delete(moviesSeries);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             return RedirectToAction("Index");
         }
 

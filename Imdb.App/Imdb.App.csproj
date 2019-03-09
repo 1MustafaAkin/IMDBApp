@@ -154,6 +154,7 @@
     <Content Include="Content\images\uploads\hobbit.jpg" />
     <Content Include="Content\images\uploads\John Wick.jpg" />
     <Content Include="Content\images\uploads\matrix.png" />
+    <Content Include="Content\images\uploads\oblivion.jpg" />
     <Content Include="Content\images\uploads\pacific rim.jpg" />
     <Content Include="Content\images\uploads\yüzük.jpg" />
     <Content Include="Content\Site.css" />
