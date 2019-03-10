@@ -81,12 +81,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ICategoryDal.cs" />
     <Compile Include="Abstract\ICountryDal.cs" />
     <Compile Include="Abstract\IEmployeeDal.cs" />
     <Compile Include="Abstract\IEntityRepository.cs" />
     <Compile Include="Abstract\IMoviesSeriesDal.cs" />
     <Compile Include="Abstract\IRoleDal.cs" />
     <Compile Include="Abstract\IUserDal.cs" />
+    <Compile Include="Concrete\EfCategoryDal.cs" />
     <Compile Include="Concrete\EfCountryDal.cs" />
     <Compile Include="Concrete\EfEmployeeDal.cs" />
     <Compile Include="Concrete\EfRepositoryBase.cs" />

@@ -33,8 +33,9 @@ namespace Imdb.BLL.DependencyResolver.Ninject
 
             Bind<IRoleService>().To<RoleManager>().InSingletonScope();
             Bind<IRoleDal>().To<EfRolesDal>().InSingletonScope();
-            //Bind<ICategoryService>().To<CategoryManager>().InSingletonScope();
-            //Bind<ICategoryDal>().To<EfCategoryDal>().InSingletonScope();
+
+            Bind<ICategoryService>().To<CategoryManager>().InSingletonScope();
+            Bind<ICategoryDal>().To<EfCategoryDal>().InSingletonScope();
         }
     }
 }
