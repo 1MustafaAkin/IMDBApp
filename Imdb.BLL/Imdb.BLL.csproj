@@ -67,6 +67,7 @@
     <Compile Include="Abstract\ICountryService.cs" />
     <Compile Include="Abstract\IEmployeeService.cs" />
     <Compile Include="Abstract\IMoviesSeriesService.cs" />
+    <Compile Include="Abstract\INewsService.cs" />
     <Compile Include="Abstract\IRoleService.cs" />
     <Compile Include="Abstract\ISeasonService.cs" />
     <Compile Include="Abstract\IUserService.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Concrete\CountryManager.cs" />
     <Compile Include="Concrete\EmployeeManager.cs" />
     <Compile Include="Concrete\MoviesSeriesManager.cs" />
+    <Compile Include="Concrete\NewsManager.cs" />
     <Compile Include="Concrete\RoleManager.cs" />
     <Compile Include="Concrete\SeasonManager.cs" />
     <Compile Include="Concrete\UserManager.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="ValidationRules\CategoryValidator.cs" />
     <Compile Include="ValidationRules\EmployeeValidator.cs" />
     <Compile Include="ValidationRules\MoviesSeriesValidator.cs" />
+    <Compile Include="ValidationRules\NewsValidator.cs" />
     <Compile Include="ValidationRules\SeasonValidator.cs" />
     <Compile Include="ValidationRules\UserValidator.cs" />
   </ItemGroup>

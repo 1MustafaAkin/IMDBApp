@@ -39,6 +39,9 @@ namespace Imdb.BLL.DependencyResolver.Ninject
 
             Bind<ISeasonService>().To<SeasonManager>().InSingletonScope();
             Bind<ISeasonDal>().To<EfSeasonDal>().InSingletonScope();
+
+            Bind<INewsService>().To<NewsManager>().InSingletonScope();
+            Bind<INewsDal>().To<EfNewsDal>().InSingletonScope();
         }
     }
 }
