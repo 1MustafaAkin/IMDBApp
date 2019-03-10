@@ -1,4 +1,6 @@
 ﻿using Imdb.BLL.Abstract;
+using Imdb.BLL.Utilities;
+using Imdb.BLL.ValidationRules;
 using Imdb.DAL.Abstract;
 using Imdb.DATA.Concrete;
 using System;
@@ -21,6 +23,7 @@ namespace Imdb.BLL.Concrete
 
         public void Add(Categories category)
         {
+            ValidationTool.Validate(new CategoryValidator(), category);
             _categoryDal.Add(category);
         }
 
@@ -48,6 +51,7 @@ namespace Imdb.BLL.Concrete
 
         public void Update(Categories category)
         {
+            ValidationTool.Validate(new CategoryValidator(), category);
             _categoryDal.Update(category);
         }
     }

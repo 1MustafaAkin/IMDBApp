@@ -1,0 +1,43 @@
+﻿@model Imdb.DATA.Concrete.Season
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Season</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MoviesSeries.MovieSeriesName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoviesSeries.MovieSeriesName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeasonNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeasonNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Episode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Episode)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SeasonID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

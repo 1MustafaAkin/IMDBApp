@@ -58,5 +58,10 @@ namespace Imdb.BLL.Concrete
             ValidationTool.Validate(new MoviesSeriesValidator(), moviesSeries);
             _moviesSeriesDal.Update(moviesSeries);
         }
+
+        public List<MoviesSeries> GetMoviesSeriesByIsSeries()
+        {
+            return _moviesSeriesDal.GetAll(x => x.IsSeries == true);
+        }
     }
 }

@@ -36,6 +36,9 @@ namespace Imdb.BLL.DependencyResolver.Ninject
 
             Bind<ICategoryService>().To<CategoryManager>().InSingletonScope();
             Bind<ICategoryDal>().To<EfCategoryDal>().InSingletonScope();
+
+            Bind<ISeasonService>().To<SeasonManager>().InSingletonScope();
+            Bind<ISeasonDal>().To<EfSeasonDal>().InSingletonScope();
         }
     }
 }

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Imdb.DATA.Concrete.Season>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MoviesSeries.MovieSeriesName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SeasonNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Episode)
+        </th>
+        <th>
+            @Html.DisplayName("Edit")
+        </th>
+        <th>
+            @Html.DisplayName("Details")
+        </th>
+        <th>
+            @Html.DisplayName("Delete")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MoviesSeries.MovieSeriesName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeasonNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Episode)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.SeasonID }, new { @class = "btn btn-success" })
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.SeasonID }, new { @class = "btn btn-info" })
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id = item.SeasonID }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

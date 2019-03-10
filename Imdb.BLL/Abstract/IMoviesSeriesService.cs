@@ -14,6 +14,7 @@ namespace Imdb.BLL.Abstract
         //List<MoviesSeries> GetMoviesSeriesByCategory(int categoryId);
         List<MoviesSeries> GetMoviesSeriesByMovieSeriesName(string moviesSeriesName);
         MoviesSeries GetMoviesSeriesById(int? id);
+        List<MoviesSeries> GetMoviesSeriesByIsSeries();
         void Add(MoviesSeries moviesSeries);
         void Update(MoviesSeries moviesSeries);
         void Delete(MoviesSeries moviesSeries);
