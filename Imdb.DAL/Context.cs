@@ -57,8 +57,6 @@ namespace Imdb.DAL
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-
             base.OnModelCreating(modelBuilder);
         }
 

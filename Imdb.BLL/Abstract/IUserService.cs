@@ -10,9 +10,8 @@ namespace Imdb.BLL.Abstract
     public interface IUserService
     {
         List<User> GetAll();
-        //TODO
-        //List<User> GetUsersByTitle(int titleId);
-        List<User> GetUsersByUserName(string userName);
+        User GetUsersById(int id);
+        User GetUsersByUserName(string userName);
         void Add(User user);
         void Update(User user);
         void Delete(User user);

@@ -86,7 +86,9 @@ namespace Imdb.App.Controllers
             switch (result)
             {   
                 case SignInStatus.Success:
+                    
                     Session["OnlineKullanici"] = model.Email;
+                    Session["OnlineKullaniciID"] = _userService.GetUsersByUserName(user.UserName);
                     if (roleName != "admin")
                         return RedirectToLocal(returnUrl);
                     else
@@ -179,6 +181,8 @@ namespace Imdb.App.Controllers
                     if (!UserManager.IsInRole(user.Id, "admin"))
                         UserManager.AddToRole(user.Id, "normal");
                     Session["OnlineKullanici"] = user.Email;
+                    Session["OnlineKullaniciID"] = _userService.GetUsersByUserName(user.UserName);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

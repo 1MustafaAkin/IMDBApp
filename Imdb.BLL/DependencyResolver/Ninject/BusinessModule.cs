@@ -42,6 +42,7 @@ namespace Imdb.BLL.DependencyResolver.Ninject
 
             Bind<INewsService>().To<NewsManager>().InSingletonScope();
             Bind<INewsDal>().To<EfNewsDal>().InSingletonScope();
+
         }
     }
 }

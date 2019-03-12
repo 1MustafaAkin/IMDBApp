@@ -148,14 +148,18 @@
     <Content Include="Content\css\style.css" />
     <Content Include="Content\images\uploads\avengers iw.jpg" />
     <Content Include="Content\images\uploads\batman dark.jpg" />
+    <Content Include="Content\images\uploads\BladeRunner2049.jpg" />
     <Content Include="Content\images\uploads\cinderella man.jpg" />
     <Content Include="Content\images\uploads\dünya savaşı z.jpg" />
     <Content Include="Content\images\uploads\dünyanın durduğu gün.jpg" />
     <Content Include="Content\images\uploads\hobbit.jpg" />
+    <Content Include="Content\images\uploads\imageedit__5226730689.png" />
     <Content Include="Content\images\uploads\John Wick.jpg" />
     <Content Include="Content\images\uploads\matrix.png" />
     <Content Include="Content\images\uploads\oblivion.jpg" />
     <Content Include="Content\images\uploads\pacific rim.jpg" />
+    <Content Include="Content\images\uploads\user-hero-bg.jpg" />
+    <Content Include="Content\images\uploads\user-img.png" />
     <Content Include="Content\images\uploads\yüzük.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -251,6 +255,8 @@
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Edit.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\UserProfiles\Details.cshtml" />
+    <Content Include="Views\UserProfiles\Index.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -293,11 +299,13 @@
     <Compile Include="Controllers\MoviesSeriesController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SeasonsController.cs" />
+    <Compile Include="Controllers\UserProfilesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

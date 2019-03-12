@@ -1,0 +1,217 @@
+﻿@model Imdb.DATA.Concrete.User
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="hero user-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1>@Model.FirstName Profile's</h1>
+                    <ul class="breadcumb">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li> <span class="ion-ios-arrow-right"></span>Profile</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page-single">
+    <div class="container">
+        <div class="row ipad-width">
+            <div class="col-md-3 col-sm-12 col-xs-12">
+                <div class="user-information">
+                    <div class="user-img">
+                        @if (Model.Avatar == null)
+                        {
+                            <a href="#"><img src="~/Content/images/uploads/user-img.png" alt=""><br></a>
+                        }
+                        else
+                        {
+                            <a href="#"><img src="@Url.Content(Model.Avatar)" width="120" height="120" alt=""><br></a>
+                        }
+
+
+                        @using (Html.BeginForm("ChangeAvatar", "UserProfiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <table>
+                                <tr>
+                                    <td>File:</td>
+                                    <td><input type="file" name="File" id="File" multiple /></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td><input type="submit" name="submit" value="Upload" /></td>
+                                </tr>
+                            </table>
+                        }
+                        @*<a href="#" class="redbtn">Change avatar</a>*@
+                    </div>
+                    <div class="user-fav">
+                        <p>Account Details</p>
+                        <ul>
+                            <li class="active">@Html.ActionLink("Profile", "Index", "UserProfiles")</li>
+                            <li><a href="userfavoritelist.html">Favorite movies</a></li>
+                            <li><a href="userrate.html">Rated movies</a></li>
+                        </ul>
+                    </div>
+                    <div class="user-fav">
+                        <p>Others</p>
+                        <ul>
+                            <li><a href="#">Change password</a></li>
+                            <li>
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                                    }
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <div class="form-style-1 user-pro" action="">
+                    <form action="" class="user">
+                        <h4>01. Profile details</h4>
+                        <div class="row">
+                            <div class="col-md-6 form-it">
+                                <label>Username</label>
+                                <input type="text" placeholder="edwardkennedy" value="@Model.UserName">
+                            </div>
+                            <div class="col-md-6 form-it">
+                                <label>Email Address</label>
+                                <input type="text" placeholder="edward@kennedy.com" value="@Model.Email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-it">
+                                <label>First Name</label>
+                                <input type="text" placeholder="Edward " value="@Model.FirstName">
+                            </div>
+                            <div class="col-md-6 form-it">
+                                <label>Last Name</label>
+                                <input type="text" placeholder="Kennedy" value="@Model.LastName">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-it">
+                                <label>Birth Date</label>
+                                <input type="text" placeholder="Kennedy" value="@Model.BirthDate.ToShortDateString()">
+                            </div>
+                            <div class="col-md-6 form-it">
+                                <label>Gender</label>
+                                @if (Model.Gender == true)
+                                {
+                                    <input type="text" placeholder="Kennedy" value="Erkek">
+                                }
+                                else
+                                {
+                                    <input type="text" placeholder="Kennedy" value="Kadin">
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input class="submit" type="submit" value="save">
+                            </div>
+                        </div>
+                    </form>
+                    <form action="" class="password">
+                        <h4>02. Change password</h4>
+                        <div class="row">
+                            <div class="col-md-6 form-it">
+                                <label>Old Password</label>
+                                <input type="text" placeholder="**********">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-it">
+                                <label>New Password</label>
+                                <input type="text" placeholder="***************">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-it">
+                                <label>Confirm New Password</label>
+                                <input type="text" placeholder="*************** ">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input class="submit" type="submit" value="change">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Avatar)
+            </th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Avatar)
+            </td>
+        </tr>
+    }
+
+    </table>*@

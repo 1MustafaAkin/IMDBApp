@@ -40,10 +40,11 @@ namespace Imdb.BLL.Concrete
         //    return _userDal.GetAll(x => x.TitleID == titleId);
         //}
 
-        public List<User> GetUsersByUserName(string userName)
+        public User GetUsersByUserName(string userName)
         {
             //Burada yine Expression parametre olarak yazdığımız yere linq sorgusu göndermiş olduk
-            return _userDal.GetAll(x => x.UserName.ToLower().Contains(userName.ToLower()));
+            //return _userDal.GetAll(x => x.UserName.ToLower().Contains(userName.ToLower()));
+            return _userDal.Get(x => x.UserName.ToLower() == userName.ToLower());
         }
 
         public void Add(User user)
@@ -69,6 +70,11 @@ namespace Imdb.BLL.Concrete
                 throw new Exception("Silme Gerçekleşemedi");
             }
 
+        }
+
+        public User GetUsersById(int id)
+        {
+            return _userDal.Get(x => x.UserID == id);
         }
     }
 }
