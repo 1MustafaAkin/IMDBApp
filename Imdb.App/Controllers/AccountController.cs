@@ -21,10 +21,11 @@ namespace Imdb.App.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private IUserService _userService;
-
+        private IWatchListService _watchListService;
         public AccountController()
         {
             _userService = InstanceFactory.GetInstance<IUserService>();
+            _watchListService = InstanceFactory.GetInstance<IWatchListService>();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -171,13 +172,16 @@ namespace Imdb.App.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     User userConcrete = new User();
+                    WatchList watchList = new WatchList();
                     userConcrete.UserName = model.Email;
                     userConcrete.Password = model.Password;
                     userConcrete.FirstName = model.User.FirstName;
                     userConcrete.LastName = model.User.LastName;
                     userConcrete.Email = model.User.Email;
+                    watchList.WatchListName = userConcrete.UserName + "'s WatchList";
+                    userConcrete.WatchList = watchList;
                     user.User = userConcrete;
-                    
+
                     if (!UserManager.IsInRole(user.Id, "admin"))
                         UserManager.AddToRole(user.Id, "normal");
                     Session["OnlineKullanici"] = user.Email;

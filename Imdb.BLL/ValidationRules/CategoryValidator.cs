@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Imdb.BLL.ValidationRules
-{
+{   
+    //3.Adım Nullable ise
     public class CategoryValidator: AbstractValidator<Categories>
     {
         public CategoryValidator()

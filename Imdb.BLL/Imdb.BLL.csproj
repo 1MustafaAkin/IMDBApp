@@ -71,6 +71,7 @@
     <Compile Include="Abstract\IRoleService.cs" />
     <Compile Include="Abstract\ISeasonService.cs" />
     <Compile Include="Abstract\IUserService.cs" />
+    <Compile Include="Abstract\IWatchListService.cs" />
     <Compile Include="Concrete\CategoryManager.cs" />
     <Compile Include="Concrete\CountryManager.cs" />
     <Compile Include="Concrete\EmployeeManager.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Concrete\RoleManager.cs" />
     <Compile Include="Concrete\SeasonManager.cs" />
     <Compile Include="Concrete\UserManager.cs" />
+    <Compile Include="Concrete\WatchListManager.cs" />
     <Compile Include="DependencyResolver\Ninject\BusinessModule.cs" />
     <Compile Include="DependencyResolver\Ninject\InstanceFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

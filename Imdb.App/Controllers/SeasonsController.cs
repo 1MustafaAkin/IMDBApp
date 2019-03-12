@@ -82,7 +82,7 @@ namespace Imdb.App.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.MoviesSeriesID = new SelectList(_moviesSeriesService.GetAll(), "MovieSeriesID", "MovieSeriesName", season.MoviesSeriesID);
+            ViewBag.MoviesSeriesID = new SelectList(_moviesSeriesService.GetMoviesSeriesByIsSeries(), "MovieSeriesID", "MovieSeriesName", season.MoviesSeriesID);
             return View(season);
         }
 
@@ -109,7 +109,7 @@ namespace Imdb.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Season season = _seasonService.GetSeasonById(id);
+            Season season = _seasonService.GetAllWithIncludeById(id, "MoviesSeries");
             if (season == null)
             {
                 return HttpNotFound();

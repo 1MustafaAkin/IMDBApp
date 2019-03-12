@@ -118,7 +118,7 @@ namespace Imdb.App.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = _employeeService.GetEmployeeById(id);
+            Employee employee = _employeeService.GetAllWithIncludeById(id, "Country", "Role");
             if (employee == null)
             {
                 return HttpNotFound();

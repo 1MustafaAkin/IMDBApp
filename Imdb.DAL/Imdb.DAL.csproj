@@ -90,6 +90,7 @@
     <Compile Include="Abstract\IRoleDal.cs" />
     <Compile Include="Abstract\ISeasonDal.cs" />
     <Compile Include="Abstract\IUserDal.cs" />
+    <Compile Include="Abstract\IWatchListDal.cs" />
     <Compile Include="Concrete\EfCategoryDal.cs" />
     <Compile Include="Concrete\EfCountryDal.cs" />
     <Compile Include="Concrete\EfEmployeeDal.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Concrete\EfSeasonDal.cs" />
     <Compile Include="Concrete\EfUserDal.cs" />
     <Compile Include="Concrete\EfMoviesSeriesDal.cs" />
+    <Compile Include="Concrete\EfWatchListDal.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Mapping\CategoryMapping.cs" />
     <Compile Include="Mapping\CountryMapping.cs" />

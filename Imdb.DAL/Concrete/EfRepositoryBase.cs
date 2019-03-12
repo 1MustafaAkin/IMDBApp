@@ -87,7 +87,7 @@ namespace Imdb.DAL.Concrete
                 IQueryable<TEntity> query = db.Set<TEntity>();
                 foreach (string inc in include)
                 {
-                    query = query.Include(inc);
+                    query = query.Include(inc); //db.Employee.Include("Country").Include("Role");
                 }
 
                 return filter == null ? query.ToList() : query.Where(filter).ToList();
