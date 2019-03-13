@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "ListOfMovies";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<!--Yapılacaklar: Tüm film sayısı dinamik yazılacak, sayfalama işleri yapılacak, filmler ilgili filmin sayfasına gönderecek. SortBy düzenlenecek. Görünüm türü düzenlenecek.
+    push etmek için değişiklik.-->
+<!DOCTYPE html>
+
+<html lang="en" class="no-js">
+<head>
+    <!-- Basic need -->
+    <title>MoviesSeriesList</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <link rel="profile" href="#">
+    <!--Google Font-->
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
+    <!-- Mobile specific meta -->
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone-no">
+
+
+</head>
+<body>
+    <div class="hero common-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="hero-ct">
+                        <h1>Movie Listing - Grid Fullwidth</h1>
+                        <ul class="breadcumb">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+
+                    <div class="topbar-filter fw">
+
+                        @* alta kaç adet film varsa dinamik basılacak *@
+                        <p>Found <span>1,608 movies</span> in total</p>
+                        <label>Sort by:</label>
+                        <select>
+                            <option value="popularity">Popularity Descending</option>
+                            <option value="popularity">Popularity Ascending</option>
+                            <option value="rating">Rating Descending</option>
+                            <option value="rating">Rating Ascending</option>
+                            <option value="date">Release date Descending</option>
+                            <option value="date">Release date Ascending</option>
+                        </select>
+                        <a href="movielist.html" class="list"><i class="ion-ios-list-outline "></i></a>
+                        <a href="moviegridfw.html" class="grid"><i class="ion-grid active"></i></a>
+                    </div>
+                    <div class="flex-wrap-movielist mv-grid-fw">
+
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <div class="movie-item-style-2 movie-item-style-1">
+                                    <img src="@Url.Content(item.Photos)" alt="">
+                                    <div class="hvr-inner">
+                                        <a href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+                                    </div>
+                                    <div class="mv-item-infor">
+                                        <h6><a href="#">@item.MovieSeriesName</a></h6>
+                                        <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    </div>
+                    <div class="topbar-filter">
+                        <label>Movies per page:</label>
+                        <select>
+                            <option value="range">20 Movies</option>
+                            <option value="saab">10 Movies</option>
+                        </select>
+
+                        <div class="pagination2">
+                            <span>Page 1 of 2:</span>
+                            <a class="active" href="#">1</a>
+                            <a href="#">2345</a>
+                            <a href="#">3</a>
+                            <a href="#">5</a>
+                            <a href="#">78</a>
+                            <a href="#">79</a>
+                            <a href="#"><i class="ion-arrow-right-b"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
