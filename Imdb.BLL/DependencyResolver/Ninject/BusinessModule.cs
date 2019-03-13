@@ -46,6 +46,9 @@ namespace Imdb.BLL.DependencyResolver.Ninject
             Bind<IWatchListService>().To<WatchListManager>().InSingletonScope();
             Bind<IWatchListDal>().To<EfWatchListDal>().InSingletonScope();
 
+            Bind<IApplicationUserService>().To<ApplicationUserManager>().InSingletonScope();
+            Bind<IApplicationUserDal>().To<EfApplicationUserDal>().InSingletonScope();
+
         }
     }
 }

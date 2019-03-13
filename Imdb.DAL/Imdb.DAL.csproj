@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IApplicationUserDal.cs" />
     <Compile Include="Abstract\ICategoryDal.cs" />
     <Compile Include="Abstract\ICountryDal.cs" />
     <Compile Include="Abstract\IEmployeeDal.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Abstract\ISeasonDal.cs" />
     <Compile Include="Abstract\IUserDal.cs" />
     <Compile Include="Abstract\IWatchListDal.cs" />
+    <Compile Include="Concrete\EfApplicationUserDal.cs" />
     <Compile Include="Concrete\EfCategoryDal.cs" />
     <Compile Include="Concrete\EfCountryDal.cs" />
     <Compile Include="Concrete\EfEmployeeDal.cs" />

@@ -87,7 +87,7 @@ namespace Imdb.App.Controllers
             switch (result)
             {   
                 case SignInStatus.Success:
-                    
+
                     Session["OnlineKullanici"] = model.Email;
                     Session["OnlineKullaniciID"] = _userService.GetUsersByUserName(user.UserName);
                     if (roleName != "admin")

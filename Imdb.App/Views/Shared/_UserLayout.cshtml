@@ -29,6 +29,9 @@
             margin-right: 17px;
         }
     </style>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body class="openform">
     <div id="preloader">
@@ -81,7 +84,7 @@
                             else
                             {
                                 @*<li>@Html.ActionLink(Session["OnlineKullanici"].ToString(), "", "")</li>
-                <li>@Html.ActionLink("Logout", "Index", "Home")</li>*@
+                                    <li>@Html.ActionLink("Logout", "Index", "Home")</li>*@
                                 @Html.Partial("_LoginPartial")
                             }
                         }
@@ -163,5 +166,6 @@
     <script src="../../Content/js/plugins.js"></script>
     <script src="../../Content/js/plugins2.js"></script>
     <script src="../../Content/js/custom.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

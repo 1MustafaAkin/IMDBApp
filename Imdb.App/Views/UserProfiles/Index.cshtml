@@ -41,11 +41,11 @@
                             <table>
                                 <tr>
                                     <td>File:</td>
-                                    <td><input type="file" name="File" id="File" multiple /></td>
+                                    <td><input style="color: transparent;" type="file" name="File"></td>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;</td>
-                                    <td><input type="submit" name="submit" value="Upload" /></td>
+                                    <td><input type="submit" name="submit" class="redbtn" value="Upload" /></td>
                                 </tr>
                             </table>
                         }
@@ -78,43 +78,44 @@
                 </div>
             </div>
             <div class="col-md-9 col-sm-12 col-xs-12">
-                <div class="form-style-1 user-pro" action="">
-                    <form action="" class="user">
+                <div class="form-style-1 user-pro">
+                    @using (Html.BeginForm("UpdateProfile", "UserProfiles", new { id = Model.UserID }, FormMethod.Post))
+                    {
                         <h4>01. Profile details</h4>
                         <div class="row">
                             <div class="col-md-6 form-it">
                                 <label>Username</label>
-                                <input type="text" placeholder="edwardkennedy" value="@Model.UserName">
+                                <input type="text" value="@Model.UserName" name="UserName">
                             </div>
                             <div class="col-md-6 form-it">
                                 <label>Email Address</label>
-                                <input type="text" placeholder="edward@kennedy.com" value="@Model.Email">
+                                <input type="text" value="@Model.Email" name="Email">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-it">
                                 <label>First Name</label>
-                                <input type="text" placeholder="Edward " value="@Model.FirstName">
+                                <input type="text" value="@Model.FirstName" name="FirstName">
                             </div>
                             <div class="col-md-6 form-it">
                                 <label>Last Name</label>
-                                <input type="text" placeholder="Kennedy" value="@Model.LastName">
+                                <input type="text" value="@Model.LastName" name="LastName">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-it">
                                 <label>Birth Date</label>
-                                <input type="text" placeholder="Kennedy" value="@Model.BirthDate.ToShortDateString()">
+                                <input type="text" value="@Model.BirthDate.ToShortDateString()" name="BirthDate">
                             </div>
                             <div class="col-md-6 form-it">
                                 <label>Gender</label>
                                 @if (Model.Gender == true)
                                 {
-                                    <input type="text" placeholder="Kennedy" value="Erkek">
+                                    <input type="text" disabled value="Erkek" name="Gender">
                                 }
                                 else
                                 {
-                                    <input type="text" placeholder="Kennedy" value="Kadin">
+                                    <input type="text" disabled value="Kadin" name="Gender">
                                 }
                             </div>
                         </div>
@@ -123,33 +124,33 @@
                                 <input class="submit" type="submit" value="save">
                             </div>
                         </div>
-                    </form>
-                    <form action="" class="password">
-                        <h4>02. Change password</h4>
-                        <div class="row">
-                            <div class="col-md-6 form-it">
-                                <label>Old Password</label>
-                                <input type="text" placeholder="**********">
+                    }
+                    @*<form action="" class="password">
+                            <h4>02. Change password</h4>
+                            <div class="row">
+                                <div class="col-md-6 form-it">
+                                    <label>Old Password</label>
+                                    <input type="text" placeholder="**********">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 form-it">
-                                <label>New Password</label>
-                                <input type="text" placeholder="***************">
+                            <div class="row">
+                                <div class="col-md-6 form-it">
+                                    <label>New Password</label>
+                                    <input type="text" placeholder="***************">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 form-it">
-                                <label>Confirm New Password</label>
-                                <input type="text" placeholder="*************** ">
+                            <div class="row">
+                                <div class="col-md-6 form-it">
+                                    <label>Confirm New Password</label>
+                                    <input type="text" placeholder="*************** ">
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <input class="submit" type="submit" value="change">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <input class="submit" type="submit" value="change">
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>*@
                 </div>
             </div>
         </div>
@@ -157,61 +158,20 @@
 </div>
 
 
-@*<table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BirthDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Avatar)
-            </th>
-        </tr>
+@* TODO *@
+@* üstte type ı button yap ajax la iyileştir burasını *@
 
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BirthDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Avatar)
-            </td>
-        </tr>
-    }
+@*@section scripts{
+        <script>
+            $("#btnSaveProfile").click(function () {
+                var user = $('#btnSaveProfile').attr("data-user");
+                $.ajax({
+                    method: "post",
+                    url: "@Url.Action("UpdateProfile", "UserProfiles")",
+                    data: user
+                })
+            })
+        </script>
 
-    </table>*@
+    }*@
+

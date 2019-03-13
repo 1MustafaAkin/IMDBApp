@@ -13,18 +13,21 @@ using Imdb.BLL.DependencyResolver.Ninject;
 using Imdb.DAL;
 using Imdb.DATA.Concrete;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Imdb.App.Controllers
 {
     public class UserProfilesController : Controller
     {
-        private Context db = new Context();
+
 
         private IUserService _userService;
+        private IApplicationUserService _applicationUserService;
 
         public UserProfilesController()
         {
             _userService = InstanceFactory.GetInstance<IUserService>();
+            _applicationUserService = InstanceFactory.GetInstance<IApplicationUserService>();
         }
 
         public ActionResult Index()
@@ -58,19 +61,36 @@ namespace Imdb.App.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: UserProfiles/Details/5
-        public ActionResult Details(int? id)
+        [HttpPost]
+        public ActionResult UpdateProfile(int id,FormCollection form)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.User.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
+            User user = _userService.GetUsersById(id);
+            ApplicationUser appUser = _applicationUserService.GetApplicationUserByUserId(id);
+            user.UserName = appUser.Email = appUser.UserName =form["UserName"];
+            user.Email = form["Email"];
+            user.FirstName = form["FirstName"];
+            user.LastName = form["LastName"];
+            user.BirthDate = Convert.ToDateTime(form["BirthDate"]);
+            _applicationUserService.Update(appUser);
+            _userService.Update(user);
+            //TODO User update edildiğinde sessionunda update edilmesi lazım düzeltilecek
+            Session["OnlineKullanici"] = appUser.Email;
+            return RedirectToAction("Index");
         }
+
+        //// GET: UserProfiles/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    User user = _userService.GetUsersById(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(user);
+        //}
     }
 }
