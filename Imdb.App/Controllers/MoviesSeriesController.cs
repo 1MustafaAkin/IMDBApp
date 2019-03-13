@@ -129,13 +129,23 @@ namespace Imdb.App.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult ListOfMovies()
+        {
+            return View(_moviesSeriesService.GetMoviesSeriesByIsMovies());
+        }
+
+        public ActionResult ListOfSeries()
+        {
+            return View(_moviesSeriesService.GetMoviesSeriesByIsSeries());
+        }
+
 
 
         //protected override void Dispose(bool disposing)
         //{
         //    if (disposing)
         //    {   
-                
+
         //        //db.Dispose();
         //    }
         //    base.Dispose(disposing);
