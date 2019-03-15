@@ -8,19 +8,19 @@
 <div class="slider movie-items">
     <div class="container">
         <div class="row">
-            <div class="slick-multiItemSlider">
+            <div class="slick-multiItemSlider">5
                 @{
                     foreach (var item in Model)
                     {
                         <div class="movie-item">
                             <div class="mv-img">
-                                <a href="#"><img src="@Url.Content(item.Photos)" alt="" width="285" height="437"></a>
+                                <a href="@Url.Action("MoviesSeriesDetails", "MoviesSeries", new {  id = item.MovieSeriesID })"><img src="@Url.Content(item.Photos)" alt="" width="285" height="437"></a>
                             </div>
                             <div class="title-in">
                                 <div class="cate">
                                     <span class="blue"><a href="#">Sci-fi</a></span>
                                 </div>
-                                <h6><a href="#">@item.MovieSeriesName</a></h6>
+                                <h6><a href="@Url.Action("MoviesSeriesDetails", "MoviesSeries", new {  id = item.MovieSeriesID })">@item.MovieSeriesName</a></h6>
                                 <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                                                             <a href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
                                                         </div>
                                                         <div class="title-in">
-                                                            <h6><a href="#">@item.MovieSeriesName</a></h6>
+                                                            <h6><a href="@Url.Action("MoviesSeriesDetails", "MoviesSeries", new {  id = item.MovieSeriesID })">@item.MovieSeriesName</a></h6>
                                                             <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
                                                         </div>
                                                     </div>
