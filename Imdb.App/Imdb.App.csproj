@@ -169,6 +169,7 @@
     <Content Include="Content\images\uploads\user-img.png" />
     <Content Include="Content\images\uploads\vikings.jpg" />
     <Content Include="Content\images\uploads\yüzük.jpg" />
+    <Content Include="Content\LoginSite.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

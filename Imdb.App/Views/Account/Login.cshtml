@@ -1,7 +1,7 @@
 ﻿@using Imdb.App.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    //ViewBag.Title = "Log in";
     //Layout = "~/Views/Shared/_Layout.cshtml";
     //Layout = "~/Views/Shared/_UserLayout.cshtml";
     Layout = null;
@@ -28,11 +28,15 @@
     <!-- CSS files -->
     <link rel="stylesheet" href="../../Content/css/plugins.css">
     <link rel="stylesheet" href="../../Content/css/style.css">
+    <link href="~/Content/LoginSite.css" rel="stylesheet" />
     <style type="text/css">
         .fancybox-margin {
             margin-right: 17px;
         }
     </style>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" / >
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body class="openform">
     <div id="preloader">
@@ -48,6 +52,7 @@
     <header class="ht-header">
         <div class="container">
             <nav class="navbar navbar-default navbar-custom">
+                <div class="arkaplan"></div>
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header logo">
                     <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -67,95 +72,89 @@
                             <a href="#page-top"></a>
                         </li>
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Movies</a></li>
-                        <li><a href="#">Series</a></li>
+                        @*<li> <a href="/MoviesSeries/ListOfMovies">Movies</a></li>
+        <li> <a href="/MoviesSeries/ListOfSeries">Series</a></li>*@
+                        <li> @Html.ActionLink("Movies", "ListOfMovies", "MoviesSeries")</li>
+                        <li> @Html.ActionLink("Series", "ListOfSeries", "MoviesSeries")</li>
                         <li><a href="#">News</a></li>
                         <li><a href="#">Suggest Me Something</a></li>
                     </ul>
                     <ul class="nav navbar-nav flex-child-menu menu-right">
-                        @{
-                            <li><a href="#">Help</a></li>
-                            if (Session["OnlineKullanici"] == null)
-                            {
-                                <li>
-                                    @Html.ActionLink("Login", "Login", "Account")
-                                </li>
-                                <li>@Html.ActionLink("Sign Up", "Register", "Account")</li>
-                            }
-                            else
-                            {
-                                @*<li>@Html.ActionLink(Session["OnlineKullanici"].ToString(), "", "")</li>
-                                    <li>@Html.ActionLink("Logout", "Index", "Home")</li>*@
-                                @Html.Partial("_LoginPartial")
-                            }
-                        }
+                        <li><a href="#">Help</a></li>
+                        <li>
+                            <a href="/Account/Login">Login</a>
+                        </li>
+                        <li><a href="/Account/Register">Sign Up</a></li>
+
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
             </nav>
             <!-- top search form -->
             @*<div class="top-search">
-                    <select>
-                        <option value="united">TV show</option>
-                        <option value="saab">Others</option>
-                    </select>
-                    <input type="text" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
-                </div>*@
+                <select>
+                    <option value="united">TV show</option>
+                    <option value="saab">Others</option>
+                </select>
+                <input type="text" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
+            </div>*@
         </div>
     </header>
     <div class="buster-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <section id="loginForm">
-                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <h4>Use a local account to log in.</h4>
-                            <hr />
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                                <div class="col-md-10">
-                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <div class="checkbox">
-                                        @Html.CheckBoxFor(m => m.RememberMe)
-                                        @Html.LabelFor(m => m.RememberMe)
+        <div class="container fluid">
+            <div class="row containerRow">
+                <div class="col-md-8 icerikSutun">
+                    <div class="baslikContainer">
+                        <section id="loginForm">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @*<h4>Use a local account to log in.</h4>*@
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Log in" class="btn btn-default" />
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
-                            </div>
-                            <p>
-                                @Html.ActionLink("Register as a new user", "Register")
-                            </p>
-                            //Enable this once you have account confirmation enabled for password reset functionality
-                            <p>
-                                @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                            </p>
-                        }
-                    </section>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <div class="checkbox">
+                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                            @Html.LabelFor(m => m.RememberMe)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Log in" class="btn btn-default" />
+                                    </div>
+                                </div>
+                                <p>
+                                    @Html.ActionLink("Register as a new user", "Register")
+                                </p>
+                                //Enable this once you have account confirmation enabled for password reset functionality
+                                <p>
+                                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                                </p>
+                            }
+                        </section>
+                    </div>
                 </div>
-                <div class="col-md-4">
+                @*<div class="col-md-4">
                     <section id="socialLoginForm">
                         @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
                     </section>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
