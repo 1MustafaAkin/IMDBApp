@@ -139,10 +139,7 @@ namespace Imdb.App.Controllers
             return View(_moviesSeriesService.GetMoviesSeriesByIsSeries());
         }
 
-        public ActionResult MoviesSeriesDetails(int id)
-        {
-            return View(_moviesSeriesService.GetMoviesSeriesById(id));
-        }
+
 
         //protected override void Dispose(bool disposing)
         //{
