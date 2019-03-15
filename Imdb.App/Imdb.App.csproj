@@ -311,6 +311,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\MoviesSeries\ListOfMovies.cshtml" />
     <Content Include="Views\MoviesSeries\ListOfSeries.cshtml" />
+    <Content Include="Views\MoviesSeries\MoviesSeriesDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
