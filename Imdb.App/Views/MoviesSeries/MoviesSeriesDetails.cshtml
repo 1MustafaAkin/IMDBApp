@@ -10,10 +10,10 @@
         <div class="row">
             <div class="col-md-12">
 
-                <ul class="breadcumb">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li> <span class="ion-ios-arrow-right"></span> movie listing</li>
-                </ul>
+                @*<ul class="breadcumb">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+                    </ul>*@
             </div>
         </div>
     </div>
@@ -43,10 +43,10 @@
             <div class="col-md-8 col-sm-12 col-xs-12">
                 <div class="movie-single-ct main-content">
 
-                    <h1 class="bd-hd">@Url.Content(Model.MovieSeriesName) <span>@Url.Content(Model.ReleaseDate.ToString())</span></h1>
+                    <h1 class="bd-hd">@Url.Content(Model.MovieSeriesName) @*<span>@Url.Content(Model.ReleaseDate.ToString())</span>*@</h1>
 
                     <div class="social-btn">
-                        <a class="parent-btn" href="#"><i class="ion-heart"></i> Add to Favorite</a>
+                        <a class="parent-btn" href="#"><i class="ion-heart"></i> Add to Favorite</a> @*kişi kalp simgesine tıkladığında addwatchlist'e ekleme yapılacak*@
                         @*<div class="hover-bnt">
                                 <a class="parent-btn" href="#"><i class="ion-android-share-alt"></i>share</a>
                                 <div class="hvr-item">
@@ -59,13 +59,14 @@
                     </div>
                     <div class="movie-rate">
                         <div class="rate">
-                            <i class="ion-android-star"></i>
+                            <i class="ion-android-star"></i> @*TODO (filmin ratint değeri buraya databaseden çekilecek)*@
                             <p>
-                                <span>8.1</span> /10<br>
-                                <span class="rv">56 Reviews</span>
+                                @*<span>@Url.Content(Model.Ratings)</span> /10<br>*@
+                                @*<span class="rv">56 Reviews</span>*@
                             </p>
                         </div>
                         <div class="rate-star">
+                            TODO
                             <p>Rate This Movie:  </p>
                             <i class="ion-ios-star"></i>
                             <i class="ion-ios-star"></i>
@@ -90,27 +91,27 @@
                                 <div class="tab active" id="overview">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <p>Leonard Hofstadter and Sheldon Cooper are both brilliant physicists working at Cal Tech in Pasadena, California. They are colleagues, best friends, and roommates, although in all capacities their relationship is always tested primarily by Sheldon's regimented, deeply eccentric, and non-conventional ways.</p>
-                                            <div class="title-hd-sm">
-                                                <h4>Current Season</h4>
-                                                <a class="time" href="#">View All Seasons <i class="ion-ios-arrow-right"></i></a>
-                                            </div>
+                                            <p>@Url.Content(Model.Description)</p>
+                                            @*<div class="title-hd-sm">
+                                                    <h4>Current Season</h4>
+                                                    <a class="time" href="#">View All Seasons <i class="ion-ios-arrow-right"></i></a>
+                                                </div>*@
                                             <!-- movie cast -->
-                                            <div class="mvcast-item">
-                                                <div class="cast-it">
-                                                    <div class="cast-left series-it">
-                                                        <img alt="" src="images/uploads/season.jpg">
-                                                        <div>
-                                                            <a href="#">Season 10</a>
-                                                            <p>21 Episodes</p>
-                                                            <p>
-                                                                Season 10 of The Big Bang Theory premiered on
-                                                                September 19, 2016.
-                                                            </p>
+                                            @*<div class="mvcast-item">
+                                                    <div class="cast-it">
+                                                        <div class="cast-left series-it">
+                                                            <img alt="" src="images/uploads/season.jpg">
+                                                            <div>
+                                                                <a href="#">Season 10</a>
+                                                                <p>21 Episodes</p>
+                                                                <p>
+                                                                    Season 10 of The Big Bang Theory premiered on
+                                                                    September 19, 2016.
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                </div>*@
                                             @*<div class="title-hd-sm">
                                                     <h4>Videos &amp; Photos</h4>
                                                     <a class="time" href="#">All 5 Videos &amp; 245 Photos <i class="ion-ios-arrow-right"></i></a>
@@ -124,69 +125,69 @@
                                                         <a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0" rel="playlist"><img alt="" src="images/uploads/play-vd.png"></a>
                                                     </div>
                                                 </div>*@
-                                            @*<div class="title-hd-sm">
-                                                    <h4>cast</h4>
-                                                    <a class="time" href="#">Full Cast &amp; Crew  <i class="ion-ios-arrow-right"></i></a>
-                                                </div>*@
-                                            <!-- movie cast -->
-                                            @*<div class="mvcast-item">
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
-                                                            <img alt="" src="images/uploads/cast1.jpg">
-                                                            <a href="#">Robert Downey Jr.</a>
-                                                        </div>
-                                                        <p>...  Robert Downey Jr.</p>
+                                            <div class="title-hd-sm">
+                                                <h4>cast</h4>
+                                                @*<a class="time" href="#">Full Cast &amp; Crew  <i class="ion-ios-arrow-right"></i></a>*@
+                                            </div>
+                                            <div class="mvcast-item">
+                                                @*//TODO: buraya filmin oyuncularının ismi databaseden çekilecek.*@
+                                                <div class="cast-it">
+                                                    <div class="cast-left">
+                                                        <img alt="" src="images/uploads/cast1.jpg">
+                                                        <a href="#">Robert Downey Jr.</a>
                                                     </div>
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
-                                                            <img alt="" src="images/uploads/cast2.jpg">
-                                                            <a href="#">Chris Hemsworth</a>
-                                                        </div>
-                                                        <p>...  Thor</p>
+                                                    <p>...  Robert Downey Jr.</p>
+                                                </div>
+                                                <div class="cast-it">
+                                                    <div class="cast-left">
+                                                        <img alt="" src="images/uploads/cast2.jpg">
+                                                        <a href="#">Chris Hemsworth</a>
                                                     </div>
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
-                                                            <img alt="" src="images/uploads/cast3.jpg">
-                                                            <a href="#">Mark Ruffalo</a>
-                                                        </div>
-                                                        <p>...  Bruce Banner/ Hulk</p>
+                                                    <p>...  Thor</p>
+                                                </div>
+                                                <div class="cast-it">
+                                                    <div class="cast-left">
+                                                        <img alt="" src="images/uploads/cast3.jpg">
+                                                        <a href="#">Mark Ruffalo</a>
                                                     </div>
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
-                                                            <img alt="" src="images/uploads/cast4.jpg">
-                                                            <a href="#">Chris Evans</a>
-                                                        </div>
-                                                        <p>...  Steve Rogers/ Captain America</p>
+                                                    <p>...  Bruce Banner/ Hulk</p>
+                                                </div>
+                                                <div class="cast-it">
+                                                    <div class="cast-left">
+                                                        <img alt="" src="images/uploads/cast4.jpg">
+                                                        <a href="#">Chris Evans</a>
                                                     </div>
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
-                                                            <img alt="" src="images/uploads/cast5.jpg">
-                                                            <a href="#">Scarlett Johansson</a>
-                                                        </div>
-                                                        <p>...  Natasha Romanoff/ Black Widow</p>
+                                                    <p>...  Steve Rogers/ Captain America</p>
+                                                </div>
+                                                <div class="cast-it">
+                                                    <div class="cast-left">
+                                                        <img alt="" src="images/uploads/cast5.jpg">
+                                                        <a href="#">Scarlett Johansson</a>
                                                     </div>
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
-                                                            <img alt="" src="images/uploads/cast6.jpg">
-                                                            <a href="#">Jeremy Renner</a>
-                                                        </div>
-                                                        <p>...  Clint Barton/ Hawkeye</p>
+                                                    <p>...  Natasha Romanoff/ Black Widow</p>
+                                                </div>
+                                                <div class="cast-it">
+                                                    <div class="cast-left">
+                                                        <img alt="" src="images/uploads/cast6.jpg">
+                                                        <a href="#">Jeremy Renner</a>
                                                     </div>
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
-                                                            <img alt="" src="images/uploads/cast7.jpg">
-                                                            <a href="#">James Spader</a>
-                                                        </div>
-                                                        <p>...  Ultron</p>
+                                                    <p>...  Clint Barton/ Hawkeye</p>
+                                                </div>
+                                                <div class="cast-it">
+                                                    <div class="cast-left">
+                                                        <img alt="" src="images/uploads/cast7.jpg">
+                                                        <a href="#">James Spader</a>
                                                     </div>
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
-                                                            <img alt="" src="images/uploads/cast9.jpg">
-                                                            <a href="#">Don Cheadle</a>
-                                                        </div>
-                                                        <p>...  James Rhodes/ War Machine</p>
+                                                    <p>...  Ultron</p>
+                                                </div>
+                                                <div class="cast-it">
+                                                    <div class="cast-left">
+                                                        <img alt="" src="images/uploads/cast9.jpg">
+                                                        <a href="#">Don Cheadle</a>
                                                     </div>
-                                                </div>*@
+                                                    <p>...  James Rhodes/ War Machine</p>
+                                                </div>
+                                            </div>
                                             <div class="title-hd-sm">
                                                 <h4>User reviews</h4>
                                                 <a class="time" href="#">See All 56 Reviews <i class="ion-ios-arrow-right"></i></a>
@@ -195,6 +196,7 @@
                                             <div class="mv-user-review-item">
 
                                                 <div class="no-star">
+                                                    // TODO:kullanıcının ratingi databaseden çekilecek
                                                     <i class="ion-android-star"></i>
                                                     <i class="ion-android-star"></i>
                                                     <i class="ion-android-star"></i>
@@ -207,9 +209,10 @@
                                                     <i class="ion-android-star last"></i>
                                                 </div>
                                                 <p class="time">
+                                                    @*// TODO: kullanıcının yorum yaptığı tarih ve nicki databaseden çekilecek*@
                                                     17 December 2016 by <a href="#"> hawaiipierson</a>
                                                 </p>
-                                                <p>This is by far one of my favorite movies from the MCU. The introduction of new Characters both good and bad also makes the movie more exciting. giving the characters more of a back story can also help audiences relate more to different characters better, and it connects a bond between the audience and actors or characters. Having seen the movie three times does not bother me here as it is as thrilling and exciting every time I am watching it. In other words, the movie is by far better than previous movies (and I do love everything Marvel), the plotting is splendid (they really do out do themselves in each film, there are no problems watching it more than once.</p>
+                                                <p></p>
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-xs-12 col-sm-12">

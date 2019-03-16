@@ -67,6 +67,7 @@
     <Compile Include="Abstract\ICategoryService.cs" />
     <Compile Include="Abstract\ICountryService.cs" />
     <Compile Include="Abstract\IEmployeeService.cs" />
+    <Compile Include="Abstract\IMoviesSeriesCategoryService.cs" />
     <Compile Include="Abstract\IMoviesSeriesService.cs" />
     <Compile Include="Abstract\INewsService.cs" />
     <Compile Include="Abstract\IRoleService.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Concrete\CategoryManager.cs" />
     <Compile Include="Concrete\CountryManager.cs" />
     <Compile Include="Concrete\EmployeeManager.cs" />
+    <Compile Include="Concrete\MoviesSeriesCategoryManager.cs" />
     <Compile Include="Concrete\MoviesSeriesManager.cs" />
     <Compile Include="Concrete\NewsManager.cs" />
     <Compile Include="Concrete\RoleManager.cs" />

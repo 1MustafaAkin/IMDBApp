@@ -13,6 +13,7 @@ namespace Imdb.BLL.Abstract
         //Çoka çok bunu uygulama anında yaz
         //List<MoviesSeries> GetMoviesSeriesByCategory(int categoryId);
         List<MoviesSeries> GetMoviesSeriesByMovieSeriesName(string moviesSeriesName);
+        List<MoviesSeries> GetMoviesSeriesListById(int id);
         MoviesSeries GetMoviesSeriesById(int? id);
         List<MoviesSeries> GetMoviesSeriesByIsSeries();
         List<MoviesSeries> GetMoviesSeriesByIsMovies();

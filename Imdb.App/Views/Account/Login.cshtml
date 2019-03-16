@@ -4,267 +4,80 @@
     //ViewBag.Title = "Log in";
     //Layout = "~/Views/Shared/_Layout.cshtml";
     //Layout = "~/Views/Shared/_UserLayout.cshtml";
-    Layout = null;
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<!DOCTYPE html>
 
-<html class="openform">
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>_AdminLayout</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-    <title>Open Pediatrics</title>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
-    <link rel="profile" href="#">
-    <!--Google Font-->
-    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
-    <!-- Mobile specific meta -->
-    <meta name=viewport content="width=device-width, initial-scale=1">
-    <meta name="format-detection" content="telephone-no">
-    <!-- CSS files -->
-    <link rel="stylesheet" href="../../Content/css/plugins.css">
-    <link rel="stylesheet" href="../../Content/css/style.css">
-    <link href="~/Content/LoginSite.css" rel="stylesheet" />
-    <style type="text/css">
-        .fancybox-margin {
-            margin-right: 17px;
-        }
-    </style>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" / >
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-</head>
-<body class="openform">
-    <div id="preloader">
-        <img class="logo" src="../../Content/images/logo1.png" alt="" width="119" height="58">
-        <div id="status">
-            <span></span>
-            <span></span>
+<div class="heroo sr-single-hero2 sr-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                @*<ul class="breadcumb">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+                    </ul>*@
+            </div>
         </div>
     </div>
-    <!--end of preloading-->
-    <!--login form popup-->
-    <!--end of signup form popup-->
-    <header class="ht-header">
-        <div class="container">
-            <nav class="navbar navbar-default navbar-custom">
-                <div class="arkaplan"></div>
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header logo">
-                    <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <div id="nav-icon1">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                    <a href="index_light.html"><img class="logo" src="../../Content/images/logo1.png" alt="" width="119" height="58"></a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav flex-child-menu menu-left">
-                        <li class="hidden">
-                            <a href="#page-top"></a>
-                        </li>
-                        <li><a href="#">Home</a></li>
-                        @*<li> <a href="/MoviesSeries/ListOfMovies">Movies</a></li>
-        <li> <a href="/MoviesSeries/ListOfSeries">Series</a></li>*@
-                        <li> @Html.ActionLink("Movies", "ListOfMovies", "MoviesSeries")</li>
-                        <li> @Html.ActionLink("Series", "ListOfSeries", "MoviesSeries")</li>
-                        <li><a href="#">News</a></li>
-                        <li><a href="#">Suggest Me Something</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav flex-child-menu menu-right">
-                        <li><a href="#">Help</a></li>
-                        <li>
-                            <a href="/Account/Login">Login</a>
-                        </li>
-                        <li><a href="/Account/Register">Sign Up</a></li>
-
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </nav>
-            <!-- top search form -->
-            @*<div class="top-search">
-                <select>
-                    <option value="united">TV show</option>
-                    <option value="saab">Others</option>
-                </select>
-                <input type="text" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
-            </div>*@
-        </div>
-    </header>
-    <div class="buster-light">
-        <div class="container fluid">
-            <div class="row containerRow">
-                <div class="col-md-8 icerikSutun">
-                    <div class="baslikContainer">
-                        <section id="loginForm">
-                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                @*<h4>Use a local account to log in.</h4>*@
-                                <hr />
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+</div>
+<div class="buster-light">
+    <div class="container fluid" >
+        <div class="row">
+            <div class="col-md-8">
+                <div class="Container">     
+                    <section id="loginForm">
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @*<h4>Use a local account to log in.</h4>*@
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                        @Html.LabelFor(m => m.RememberMe)
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Log in" class="btn btn-default" />
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <div class="checkbox">
-                                            @Html.CheckBoxFor(m => m.RememberMe)
-                                            @Html.LabelFor(m => m.RememberMe)
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Log in" class="btn btn-default" />
-                                    </div>
-                                </div>
-                                <p>
-                                    @Html.ActionLink("Register as a new user", "Register")
-                                </p>
-                                //Enable this once you have account confirmation enabled for password reset functionality
-                                <p>
-                                    @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                                </p>
-                            }
-                        </section>
-                    </div>
-                </div>
-                @*<div class="col-md-4">
-                    <section id="socialLoginForm">
-                        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+                            </div>
+                            <p>
+                                @Html.ActionLink("Register as a new user", "Register")
+                            </p>
+                            //Enable this once you have account confirmation enabled for password reset functionality
+                            <p>
+                                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                            </p>
+                        }
                     </section>
-                </div>*@
+                    <div style="margin-top:70px;"></div>
+                </div>
+          
             </div>
+            
+            @*<div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>*@
         </div>
     </div>
-    @*@RenderBody()*@
-    <footer class="ht-footer">
-        <div class="container">
-            <div class="flex-parent-ft ">
-                <div class="flex-child-ft item1">
-                    <a href="index.html"><img class="logo" src="../../Content/images/logo1.png" alt=""></a>
-                    <p>
-                        5th Avenue st, manhattan<br>
-                        New York, NY 10001
-                    </p>
-                    <p>Call us: <a href="#">(+01) 202 342 6789</a></p>
-                </div>
-                <div class="flex-child-ft item2">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blockbuster</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Forums</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Help Center</a></li>
-                    </ul>
-                </div>
-                <div class="flex-child-ft item3">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Security</a></li>
-                    </ul>
-                </div>
-                <div class="flex-child-ft item4">
-                    <h4>Account</h4>
-                    <ul>
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Watchlist</a></li>
-                        <li><a href="#">Collections</a></li>
-                        <li><a href="#">User Guide</a></li>
-                    </ul>
-                </div>
-                <div class="flex-child-ft item5">
-                    <h4>Newsletter</h4>
-                    <p>Subscribe to our newsletter system now <br> to get latest news from us.</p>
-                    <form action="#">
-                        <input type="text" placeholder="Enter your email...">
-                    </form>
-                    <a href="#" class="btn">Subscribe now <i class="ion-ios-arrow-forward"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="ft-copyright">
-            <div class="ft-left">
-                <p>© 2017 Blockbuster. All Rights Reserved. Designed by leehari.</p>
-            </div>
-            <div class="backtotop">
-                <p><a href="#" id="back-to-top">Back to top  <i class="ion-ios-arrow-thin-up"></i></a></p>
-            </div>
-        </div>
-    </footer>
-    <!-- end of footer section-->
-    <script src="../../Content/js/jquery.js"></script>
-    <script src="../../Content/js/plugins.js"></script>
-    <script src="../../Content/js/plugins2.js"></script>
-    <script src="../../Content/js/custom.js"></script>
-</body>
-</html>
-
-@*<div class="container">
-        <nav class="navbar navbar-default navbar-custom">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header logo">
-                <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <div id="nav-icon1">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-                <a href="index_light.html"><img class="logo" src="../../Content/images/logo1.png" alt="" width="119" height="58"></a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav flex-child-menu menu-left">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Movies</a></li>
-                    <li><a href="#">Series</a></li>
-                    <li><a href="#">News</a></li>
-                    <li><a href="#">Suggest Me Something</a></li>
-                </ul>
-                <ul class="nav navbar-nav flex-child-menu menu-right">
-                    <li><a href="#">Help</a></li>
-                    <li>
-                        <a href="/Account/Login">Login</a>
-                    </li>
-                    <li><a href="/Account/Register">Sign Up</a></li>
-
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </nav>
-    </div>*@
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-
+</div>
