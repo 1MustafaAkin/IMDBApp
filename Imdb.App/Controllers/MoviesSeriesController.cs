@@ -20,11 +20,15 @@ namespace Imdb.App.Controllers
         public MoviesSeriesController()
         {
             _moviesSeriesService = InstanceFactory.GetInstance<IMoviesSeriesService>();
-            _ratingService= InstanceFactory.GetInstance<IRatingService>();
+            _categoryService = InstanceFactory.GetInstance<ICategoryService>();
+            _moviesSeriesCategoryService = InstanceFactory.GetInstance<IMoviesSeriesCategoryService>();
+            moviesSeriesCategory = new MoviesSeriesCategory(); 
         }
 
         private IMoviesSeriesService _moviesSeriesService;
-        private IRatingService _ratingService;
+        private ICategoryService _categoryService;
+        private IMoviesSeriesCategoryService _moviesSeriesCategoryService;
+        MoviesSeriesCategory moviesSeriesCategory;
 
         // GET: MoviesSeries
         public ActionResult Index()
@@ -50,6 +54,7 @@ namespace Imdb.App.Controllers
         // GET: MoviesSeries/Create
         public ActionResult Create()
         {
+            ViewBag.CategoryID = new SelectList(_categoryService.GetAll(), "CategoryID", "CategoryName");
             return View();
         }
 
@@ -58,14 +63,17 @@ namespace Imdb.App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MovieSeriesID,MovieSeriesName,Description,ReleaseDate,Duration,Trailer,Photos,IsSeries")] MoviesSeries moviesSeries)
+        public ActionResult Create([Bind(Include = "MovieSeriesID,MovieSeriesName,Description,ReleaseDate,Duration,Trailer,Photos,IsSeries")] MoviesSeries moviesSeries, [Bind(Include = "CategoryID")] Categories categories)
         {
             if (ModelState.IsValid)
             {
                 _moviesSeriesService.Add(moviesSeries);
+                moviesSeriesCategory.CategoryID = categories.CategoryID;
+                moviesSeriesCategory.MovieSeriesID = moviesSeries.MovieSeriesID;
+                _moviesSeriesCategoryService.Add(moviesSeriesCategory);
                 return RedirectToAction("Index");
             }
-
+            ViewBag.CategoryID = new SelectList(_categoryService.GetAll(), "CategoryID", "CategoryName");
             return View(moviesSeries);
         }
 
@@ -120,7 +128,8 @@ namespace Imdb.App.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             try
-            {
+            {   
+
                 MoviesSeries moviesSeries = _moviesSeriesService.GetMoviesSeriesById(id);
                 _moviesSeriesService.Delete(moviesSeries);
             }
@@ -144,6 +153,32 @@ namespace Imdb.App.Controllers
         public ActionResult MoviesSeriesDetails(int id)
         {
             return View(_moviesSeriesService.GetMoviesSeriesById(id));
+        }
+
+        public ActionResult AddCategoryToMoviesSeries(int id)
+        {
+            ViewBag.CategoryID = new SelectList(_categoryService.GetAll(), "CategoryID", "CategoryName");
+            ViewBag.MovieSeriesID = new SelectList(_moviesSeriesService.GetMoviesSeriesListById(id), "MovieSeriesID", "MovieSeriesName");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddCategoryToMoviesSeries([Bind(Include = "ID,MovieSeriesID,CategoryID")] MoviesSeriesCategory moviesSeriesCategory)
+        {
+            MoviesSeriesCategory DoesExistCategory = _moviesSeriesCategoryService.GetAll().FirstOrDefault(x => x.MovieSeriesID == moviesSeriesCategory.MovieSeriesID && x.CategoryID == moviesSeriesCategory.CategoryID);
+            if (DoesExistCategory == null)
+            {
+                _moviesSeriesCategoryService.Add(moviesSeriesCategory);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                Response.Write("<script language=javascript>alert('Bu kategori bu filme zaten atanmış');</script>");
+            }
+
+            ViewBag.CategoryID = new SelectList(_categoryService.GetAll(), "CategoryID", "CategoryName");
+            ViewBag.MovieSeriesID = new SelectList(_moviesSeriesService.GetMoviesSeriesListById(moviesSeriesCategory.MovieSeriesID), "MovieSeriesID", "MovieSeriesName");
+            return View();
         }
 
 

@@ -49,8 +49,8 @@ namespace Imdb.BLL.DependencyResolver.Ninject
             Bind<IApplicationUserService>().To<ApplicationUserManager>().InSingletonScope();
             Bind<IApplicationUserDal>().To<EfApplicationUserDal>().InSingletonScope();
 
-            Bind<IRatingService>().To<RatingManager>().InSingletonScope();
-            Bind<IRatingDal>().To<EfRatingDal>().InSingletonScope();
+            Bind<IMoviesSeriesCategoryService>().To<MoviesSeriesCategoryManager>().InSingletonScope();
+            Bind<IMoviesSeriesCategoryDal>().To<EfMoviesSeriesCategoryDal>().InSingletonScope();
 
         }
     }

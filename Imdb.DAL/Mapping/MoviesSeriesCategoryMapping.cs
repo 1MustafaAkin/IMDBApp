@@ -14,8 +14,8 @@ namespace Imdb.DAL.Mapping
         {
             HasKey(x => x.ID);
 
-            HasRequired(x => x.CategoryOfMovieSeries).WithMany(x => x.MoviesSeriesOfCategory).HasForeignKey(x => x.MovieSeriesID);
-            HasRequired(x => x.MovieSeriesOfCategory).WithMany(x => x.CategoriesOfMovieSeries).HasForeignKey(x => x.CategoryID);
+            HasRequired(x => x.CategoryOfMovieSeries).WithMany(x => x.MoviesSeriesOfCategory).HasForeignKey(x => x.CategoryID);
+            HasRequired(x => x.MovieSeriesOfCategory).WithMany(x => x.CategoriesOfMovieSeries).HasForeignKey(x => x.MovieSeriesID);
         }
     }
 }
