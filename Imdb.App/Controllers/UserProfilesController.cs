@@ -12,6 +12,8 @@ using Imdb.BLL.Abstract;
 using Imdb.BLL.DependencyResolver.Ninject;
 using Imdb.DAL;
 using Imdb.DATA.Concrete;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security.DataProtection;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -21,13 +23,17 @@ namespace Imdb.App.Controllers
     {
 
 
+        private readonly Context db;
         private IUserService _userService;
         private IApplicationUserService _applicationUserService;
 
         public UserProfilesController()
         {
+
             _userService = InstanceFactory.GetInstance<IUserService>();
             _applicationUserService = InstanceFactory.GetInstance<IApplicationUserService>();
+            if (db == null)
+                db = new Context();
         }
 
         public ActionResult Index()
@@ -62,21 +68,37 @@ namespace Imdb.App.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateProfile(int id,FormCollection form)
+        public ActionResult UpdateProfile(int id, FormCollection form)
         {
             User user = _userService.GetUsersById(id);
-            ApplicationUser appUser = _applicationUserService.GetApplicationUserByUserId(id);
-            user.UserName = appUser.Email = appUser.UserName =form["UserName"];
+
+
+            user.Password = form["Password"];
             user.Email = form["Email"];
             user.FirstName = form["FirstName"];
             user.LastName = form["LastName"];
             user.BirthDate = Convert.ToDateTime(form["BirthDate"]);
-            _applicationUserService.Update(appUser);
             _userService.Update(user);
-            //TODO User update edildiğinde sessionunda update edilmesi lazım düzeltilecek
-            Session["OnlineKullanici"] = appUser.Email;
             return RedirectToAction("Index");
         }
+
+        public ActionResult ChangePassword(int id, FormCollection form)
+        {
+            User user = _userService.GetUsersById(id);
+            ApplicationUser appUser = db.Users.FirstOrDefault(x => x.User.UserID == user.UserID);
+            user.Password = form["NewPassword"];
+
+            var provider = new DpapiDataProtectionProvider("Imdb.App");
+            var userStore = new UserStore<ApplicationUser>(db);
+            var manager = new ApplicationUserManager(userStore);
+
+            manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("Imdb.App"));
+            var token = manager.GeneratePasswordResetToken(appUser.Id);
+            manager.ResetPassword(appUser.Id, token, user.Password);
+            _userService.Update(user);
+            return RedirectToAction("Index");
+        }
+
 
         //// GET: UserProfiles/Details/5
         //public ActionResult Details(int? id)
