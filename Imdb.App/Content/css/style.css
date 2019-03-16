@@ -5666,6 +5666,69 @@ ul {
   background: url('../images/uploads/sr-single.jpg') no-repeat;
   height: 598px;
 }
+/*Mert*/
+.heroo {
+    background-position: center;
+    text-align: center;
+    background-size: cover;
+    position: relative;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
+}
+.heroo .hero-ct {
+    padding-top: 170px;
+}
+
+.heroo h1 {
+    font-family: 'Dosis', sans-serif;
+    font-size: 36px;
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.heroo ul.breadcumb {
+    list-style-type: none;
+}
+
+    .heroo ul.breadcumb li.active a {
+        color: #4280bf;
+    }
+
+    .heroo ul.breadcumb li,
+    .heroo ul.breadcumb a {
+        display: inline-block;
+        font-family: 'Nunito', sans-serif;
+        font-size: 14px;
+        color: #abb7c4;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+
+    .heroo ul.breadcumb span {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .heroo:before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        /*background-color: rgba(0, 0, 0, 0.75);*/
+        background-color: #233a50 !important;
+    }
+.sr-single-hero2 {
+    background: url('../images/uploads/sr-single.jpg') no-repeat;
+    height: 180px;
+}
+/*mert*/
 .hero3 {
   background: url('../images/uploads/celeb-hero-single.jpg') no-repeat;
   height: 538px;

@@ -88,6 +88,7 @@
     <Compile Include="Abstract\IEntityRepository.cs" />
     <Compile Include="Abstract\IMoviesSeriesDal.cs" />
     <Compile Include="Abstract\INewsDal.cs" />
+    <Compile Include="Abstract\IRatingDal.cs" />
     <Compile Include="Abstract\IRoleDal.cs" />
     <Compile Include="Abstract\ISeasonDal.cs" />
     <Compile Include="Abstract\IUserDal.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Concrete\EfCountryDal.cs" />
     <Compile Include="Concrete\EfEmployeeDal.cs" />
     <Compile Include="Concrete\EfNewsDal.cs" />
+    <Compile Include="Concrete\EfRatingDal.cs" />
     <Compile Include="Concrete\EfRepositoryBase.cs" />
     <Compile Include="Concrete\EfRolesDal.cs" />
     <Compile Include="Concrete\EfSeasonDal.cs" />

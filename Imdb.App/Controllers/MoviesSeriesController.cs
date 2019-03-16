@@ -20,9 +20,11 @@ namespace Imdb.App.Controllers
         public MoviesSeriesController()
         {
             _moviesSeriesService = InstanceFactory.GetInstance<IMoviesSeriesService>();
+            _ratingService= InstanceFactory.GetInstance<IRatingService>();
         }
 
         private IMoviesSeriesService _moviesSeriesService;
+        private IRatingService _ratingService;
 
         // GET: MoviesSeries
         public ActionResult Index()
