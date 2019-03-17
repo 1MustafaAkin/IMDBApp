@@ -26,12 +26,15 @@ namespace Imdb.App.Controllers
         private readonly Context db;
         private IUserService _userService;
         private IApplicationUserService _applicationUserService;
+        private IMoviesSeriesWatchListService _moviesSeriesWatchListService;
+        private IMoviesSeriesService _moviesSeriesService;
 
         public UserProfilesController()
         {
-
             _userService = InstanceFactory.GetInstance<IUserService>();
             _applicationUserService = InstanceFactory.GetInstance<IApplicationUserService>();
+            _moviesSeriesWatchListService = InstanceFactory.GetInstance<IMoviesSeriesWatchListService>();
+            _moviesSeriesService = InstanceFactory.GetInstance<IMoviesSeriesService>();
             if (db == null)
                 db = new Context();
         }
@@ -98,6 +101,21 @@ namespace Imdb.App.Controllers
             _userService.Update(user);
             return RedirectToAction("Index");
         }
+
+        List<MoviesSeries> moviesSeriesList;
+        public ActionResult WatchList()
+        {   
+            User user = (User)Session["OnlineKullaniciID"];
+            moviesSeriesList = new List<MoviesSeries>();
+            List<MoviesSeriesWatchList> moviesSeriesWatchList = _moviesSeriesWatchListService.GetMoviesSeriesWatchListByWatchList(user.UserID);
+            foreach (var item in moviesSeriesWatchList)
+            {
+                moviesSeriesList.Add(_moviesSeriesService.GetMoviesSeriesById(item.MoviesSeriesID));
+            }
+            ViewBag.WatchList = moviesSeriesList;
+            return View(user);
+        }
+
 
 
         //// GET: UserProfiles/Details/5

@@ -24,6 +24,7 @@ namespace Imdb.App.Controllers
             _employeeService = InstanceFactory.GetInstance<IEmployeeService>();
             _moviesSeriesCategoryService = InstanceFactory.GetInstance<IMoviesSeriesCategoryService>();
             _moviesSeriesEmployeeService = InstanceFactory.GetInstance<IMoviesSeriesEmployeeService>();
+            _moviesSeriesWatchListService = InstanceFactory.GetInstance<IMoviesSeriesWatchListService>();
             moviesSeriesCategory = new MoviesSeriesCategory();
         }
 
@@ -32,7 +33,9 @@ namespace Imdb.App.Controllers
         private IEmployeeService _employeeService;
         private IMoviesSeriesCategoryService _moviesSeriesCategoryService;
         private IMoviesSeriesEmployeeService _moviesSeriesEmployeeService;
+        private IMoviesSeriesWatchListService _moviesSeriesWatchListService;
         MoviesSeriesCategory moviesSeriesCategory;
+
 
         public ActionResult Index()
         {
@@ -143,9 +146,19 @@ namespace Imdb.App.Controllers
         }
 
         List<Employee> employees;
+        int sayac = 0;
         public ActionResult MoviesSeriesDetails(int id)
         {
+            User user = (User)Session["OnlineKullaniciID"];
             List<MoviesSeriesEmployee> employeesOfMoviesSeries = _moviesSeriesEmployeeService.GetEmployeeByMoviesSeriesId(id);
+            List<MoviesSeriesWatchList> moviesSeriesWatchList = _moviesSeriesWatchListService.GetMoviesSeriesWatchListByWatchList(user.UserID);
+
+            sayac = moviesSeriesWatchList.Where(x=>x.MoviesSeriesID == id).ToList().Count();
+            if (sayac != 0)
+                ViewBag.DoesExistMovieInWatchList = true;
+            else
+                ViewBag.DoesExistMovieInWatchList = false;
+
             employees = new List<Employee>();
             foreach (var item in employeesOfMoviesSeries)
             {
@@ -205,6 +218,16 @@ namespace Imdb.App.Controllers
             ViewBag.EmployeeID = new SelectList(_employeeService.GetAll(), "EmployeeID", "FirstName");
             ViewBag.MovieSeriesID = new SelectList(_moviesSeriesService.GetMoviesSeriesListById(moviesSeriesEmployee.MovieSeriesID), "MovieSeriesID", "MovieSeriesName");
             return View();
+        }
+
+        public ActionResult AddWatchList(int id)
+        {
+            MoviesSeriesWatchList moviesSeriesWatchList = new MoviesSeriesWatchList();
+            User user = (User)Session["OnlineKullaniciID"];
+            moviesSeriesWatchList.MoviesSeriesID = id;
+            moviesSeriesWatchList.WatchListID = user.UserID;
+            _moviesSeriesWatchListService.Add(moviesSeriesWatchList);
+            return RedirectToAction("MoviesSeriesDetails", "MoviesSeries", new { id = id });
         }
     }
 }

@@ -23,60 +23,7 @@
 <div class="page-single">
     <div class="container">
         <div class="row ipad-width">
-            <div class="col-md-3 col-sm-12 col-xs-12">
-                <div class="user-information">
-                    <div class="user-img">
-                        @if (Model.Avatar == null)
-                        {
-                            <a href="#"><img src="~/Content/images/uploads/user-img.png" alt=""><br></a>
-                        }
-                        else
-                        {
-                            <a href="#"><img src="@Url.Content(Model.Avatar)" width="120" height="120" alt=""><br></a>
-                        }
-
-
-                        @using (Html.BeginForm("ChangeAvatar", "UserProfiles", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                        {
-                            <table>
-                                <tr>
-                                    <td>File:</td>
-                                    <td><input style="color: transparent;" type="file" name="File"></td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp;</td>
-                                    <td><input type="submit" name="submit" class="redbtn" value="Upload" /></td>
-                                </tr>
-                            </table>
-                        }
-                        @*<a href="#" class="redbtn">Change avatar</a>*@
-                    </div>
-                    <div class="user-fav">
-                        <p>Account Details</p>
-                        <ul>
-                            <li class="active">@Html.ActionLink("Profile", "Index", "UserProfiles")</li>
-                            <li><a href="userfavoritelist.html">Favorite movies</a></li>
-                            <li><a href="userrate.html">Rated movies</a></li>
-                        </ul>
-                    </div>
-                    <div class="user-fav">
-                        <p>Others</p>
-                        <ul>
-                            <li><a href="#">Change password</a></li>
-                            <li>
-                                @if (Request.IsAuthenticated)
-                                {
-                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-                                    }
-                                }
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            @Html.Partial("UserPartial")
             <div class="col-md-9 col-sm-12 col-xs-12">
                 <div class="form-style-1 user-pro">
                     @using (Html.BeginForm("UpdateProfile", "UserProfiles", new { id = Model.UserID }, FormMethod.Post))

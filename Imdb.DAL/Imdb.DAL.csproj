@@ -89,6 +89,7 @@
     <Compile Include="Abstract\IMoviesSeriesCategoryDal.cs" />
     <Compile Include="Abstract\IMoviesSeriesDal.cs" />
     <Compile Include="Abstract\IMoviesSeriesEmployeeDal.cs" />
+    <Compile Include="Abstract\IMoviesSeriesWatchListDal.cs" />
     <Compile Include="Abstract\INewsDal.cs" />
     <Compile Include="Abstract\IRoleDal.cs" />
     <Compile Include="Abstract\ISeasonDal.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Concrete\EfCategoryDal.cs" />
     <Compile Include="Concrete\EfCountryDal.cs" />
     <Compile Include="Concrete\EfEmployeeDal.cs" />
+    <Compile Include="Concrete\EfMovieSeriesWatchListDal.cs" />
     <Compile Include="Concrete\EfMoviesSeriesCategoryDal.cs" />
     <Compile Include="Concrete\EfMoviesSeriesEmployeeDal.cs" />
     <Compile Include="Concrete\EfNewsDal.cs" />
