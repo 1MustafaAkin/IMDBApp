@@ -306,6 +306,7 @@
     <Content Include="Views\MoviesSeries\ListOfSeries.cshtml" />
     <Content Include="Views\MoviesSeries\MoviesSeriesDetails.cshtml" />
     <Content Include="Views\MoviesSeries\AddCategoryToMoviesSeries.cshtml" />
+    <Content Include="Views\MoviesSeries\AddEmployeeToMoviesSeries.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

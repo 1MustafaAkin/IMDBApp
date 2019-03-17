@@ -52,6 +52,9 @@ namespace Imdb.BLL.DependencyResolver.Ninject
             Bind<IMoviesSeriesCategoryService>().To<MoviesSeriesCategoryManager>().InSingletonScope();
             Bind<IMoviesSeriesCategoryDal>().To<EfMoviesSeriesCategoryDal>().InSingletonScope();
 
+            Bind<IMoviesSeriesEmployeeService>().To<MoviesSeriesEmployeeManager>().InSingletonScope();
+            Bind<IMoviesSeriesEmployeeDal>().To<EfMoviesSeriesEmployeeDal>().InSingletonScope();
+
         }
     }
 }

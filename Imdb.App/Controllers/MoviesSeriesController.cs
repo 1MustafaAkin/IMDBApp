@@ -21,22 +21,24 @@ namespace Imdb.App.Controllers
         {
             _moviesSeriesService = InstanceFactory.GetInstance<IMoviesSeriesService>();
             _categoryService = InstanceFactory.GetInstance<ICategoryService>();
+            _employeeService = InstanceFactory.GetInstance<IEmployeeService>();
             _moviesSeriesCategoryService = InstanceFactory.GetInstance<IMoviesSeriesCategoryService>();
+            _moviesSeriesEmployeeService = InstanceFactory.GetInstance<IMoviesSeriesEmployeeService>();
             moviesSeriesCategory = new MoviesSeriesCategory(); 
         }
 
         private IMoviesSeriesService _moviesSeriesService;
         private ICategoryService _categoryService;
+        private IEmployeeService _employeeService;
         private IMoviesSeriesCategoryService _moviesSeriesCategoryService;
+        private IMoviesSeriesEmployeeService _moviesSeriesEmployeeService;
         MoviesSeriesCategory moviesSeriesCategory;
 
-        // GET: MoviesSeries
         public ActionResult Index()
         {
             return View(_moviesSeriesService.GetAll());
         }
 
-        // GET: MoviesSeries/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -51,16 +53,12 @@ namespace Imdb.App.Controllers
             return View(moviesSeries);
         }
 
-        // GET: MoviesSeries/Create
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(_categoryService.GetAll(), "CategoryID", "CategoryName");
             return View();
         }
 
-        // POST: MoviesSeries/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "MovieSeriesID,MovieSeriesName,Description,ReleaseDate,Duration,Trailer,Photos,IsSeries")] MoviesSeries moviesSeries, [Bind(Include = "CategoryID")] Categories categories)
@@ -77,7 +75,6 @@ namespace Imdb.App.Controllers
             return View(moviesSeries);
         }
 
-        // GET: MoviesSeries/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -92,9 +89,6 @@ namespace Imdb.App.Controllers
             return View(moviesSeries);
         }
 
-        // POST: MoviesSeries/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "MovieSeriesID,MovieSeriesName,Description,ReleaseDate,Duration,Trailer,Photos,IsSeries")] MoviesSeries moviesSeries)
@@ -107,7 +101,6 @@ namespace Imdb.App.Controllers
             return View(moviesSeries);
         }
 
-        // GET: MoviesSeries/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -122,7 +115,6 @@ namespace Imdb.App.Controllers
             return View(moviesSeries);
         }
 
-        // POST: MoviesSeries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -181,15 +173,30 @@ namespace Imdb.App.Controllers
             return View();
         }
 
+        public ActionResult AddEmployeeToMoviesSeries(int id)
+        {
+            ViewBag.EmployeeID = new SelectList(_employeeService.GetAll(), "EmployeeID", "FirstName");
+            ViewBag.MovieSeriesID = new SelectList(_moviesSeriesService.GetMoviesSeriesListById(id), "MovieSeriesID", "MovieSeriesName");
+            return View();
+        }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {   
+        [HttpPost]
+        public ActionResult AddEmployeeToMoviesSeries([Bind(Include = "MovieSeriesID,EmployeeID")] MoviesSeriesEmployee moviesSeriesEmployee)
+        {
+            MoviesSeriesEmployee DoesExistEmployee = _moviesSeriesEmployeeService.GetAll().FirstOrDefault(x => x.MovieSeriesID == moviesSeriesEmployee.MovieSeriesID && x.EmployeeID == moviesSeriesEmployee.EmployeeID);
+            if (DoesExistEmployee == null)
+            {
+                _moviesSeriesEmployeeService.Add(moviesSeriesEmployee);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                Response.Write("<script language=javascript>alert('Bu kategori bu filme zaten atanmış');</script>");
+            }
 
-        //        //db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
+            ViewBag.EmployeeID = new SelectList(_employeeService.GetAll(), "EmployeeID", "FirstName");
+            ViewBag.MovieSeriesID = new SelectList(_moviesSeriesService.GetMoviesSeriesListById(moviesSeriesEmployee.MovieSeriesID), "MovieSeriesID", "MovieSeriesName");
+            return View();
+        }
     }
 }
