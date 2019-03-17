@@ -49,7 +49,7 @@ namespace Imdb.App.Controllers
             var fileName = "";
             var physicalPath = "";
             var relativePath = "";
-            if (picture.File.ContentLength > 0)
+            if (picture.File != null && picture.File.ContentLength > 0)
             {
                 relativePath = "~/Content/images/uploads/" + Path.GetFileName(picture.File.FileName);
                 physicalPath = Server.MapPath(relativePath);

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Imdb.App.Models;
 using Imdb.BLL.Abstract;
 using Imdb.BLL.DependencyResolver.Ninject;
 using Imdb.DAL;
@@ -54,15 +56,25 @@ namespace Imdb.App.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NewsID,NewsTitle,NewsContent,NewsPhoto")] News news)
+        public ActionResult Create([Bind(Include = "NewsID,NewsTitle,NewsContent,NewsPhoto")] News news, Picture picture)
         {
             if (ModelState.IsValid)
             {
+                var fileName = "";
+                var physicalPath = "";
+                var relativePath = "";
+                if (picture.File != null && picture.File.ContentLength > 0)
+                {
+                    relativePath = "~/Content/images/news/" + Path.GetFileName(picture.File.FileName);
+                    physicalPath = Server.MapPath(relativePath);
+                    picture.File.SaveAs(physicalPath);
+                }
+
+                news.NewsPhoto = relativePath + fileName;
                 _newsService.Add(news);
-                return RedirectToAction("Index");
             }
 
-            return View(news);
+            return RedirectToAction("Index");
         }
 
         // GET: News/Edit/5
@@ -119,6 +131,7 @@ namespace Imdb.App.Controllers
             _newsService.Delete(news);
             return RedirectToAction("Index");
         }
+
         public ActionResult ListOfNews()
         {
             return View(_newsService.GetNewsById(1));
