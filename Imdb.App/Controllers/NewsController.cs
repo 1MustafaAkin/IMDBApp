@@ -119,5 +119,9 @@ namespace Imdb.App.Controllers
             _newsService.Delete(news);
             return RedirectToAction("Index");
         }
+        public ActionResult ListOfNews()
+        {
+            return View(_newsService.GetNewsById(1));
+        }
     }
 }
