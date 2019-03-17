@@ -24,7 +24,7 @@ namespace Imdb.App.Controllers
             _employeeService = InstanceFactory.GetInstance<IEmployeeService>();
             _moviesSeriesCategoryService = InstanceFactory.GetInstance<IMoviesSeriesCategoryService>();
             _moviesSeriesEmployeeService = InstanceFactory.GetInstance<IMoviesSeriesEmployeeService>();
-            moviesSeriesCategory = new MoviesSeriesCategory(); 
+            moviesSeriesCategory = new MoviesSeriesCategory();
         }
 
         private IMoviesSeriesService _moviesSeriesService;
@@ -120,7 +120,7 @@ namespace Imdb.App.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             try
-            {   
+            {
 
                 MoviesSeries moviesSeries = _moviesSeriesService.GetMoviesSeriesById(id);
                 _moviesSeriesService.Delete(moviesSeries);
@@ -142,8 +142,16 @@ namespace Imdb.App.Controllers
             return View(_moviesSeriesService.GetMoviesSeriesByIsSeries());
         }
 
+        List<Employee> employees;
         public ActionResult MoviesSeriesDetails(int id)
         {
+            List<MoviesSeriesEmployee> employeesOfMoviesSeries = _moviesSeriesEmployeeService.GetEmployeeByMoviesSeriesId(id);
+            employees = new List<Employee>();
+            foreach (var item in employeesOfMoviesSeries)
+            {
+                employees.Add(_employeeService.GetEmployeeById(item.EmployeeID));
+            }
+            ViewBag.EmployeeOfMoviesSeries = employees;
             return View(_moviesSeriesService.GetMoviesSeriesById(id));
         }
 

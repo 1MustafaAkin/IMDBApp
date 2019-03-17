@@ -41,6 +41,11 @@ namespace Imdb.BLL.Concrete
             return _moviesSeriesEmployeeDal.GetAll();
         }
 
+        public List<MoviesSeriesEmployee> GetEmployeeByMoviesSeriesId(int? id)
+        {
+            return _moviesSeriesEmployeeDal.GetAll(x => x.MovieSeriesID == id);
+        }
+
         public MoviesSeriesEmployee GetMoviesSeriesEmployeeById(int? id)
         {
             return _moviesSeriesEmployeeDal.Get(x => x.MovieEmployeeID == id);

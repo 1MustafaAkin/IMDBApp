@@ -11,6 +11,7 @@ namespace Imdb.BLL.Abstract
     {
         List<MoviesSeriesEmployee> GetAll();
         MoviesSeriesEmployee GetMoviesSeriesEmployeeById(int? id);
+        List<MoviesSeriesEmployee> GetEmployeeByMoviesSeriesId(int? id);
         void Add(MoviesSeriesEmployee moviesSeriesEmployee);
         void Update(MoviesSeriesEmployee moviesSeriesEmployee);
         void Delete(MoviesSeriesEmployee moviesSeriesEmployee);
