@@ -41,8 +41,7 @@ namespace Imdb.App.Controllers
 
         public ActionResult Index()
         {
-
-            User user = (User)Session["OnlineKullaniciID"];
+            User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
             return View(user);
         }
 
@@ -62,7 +61,7 @@ namespace Imdb.App.Controllers
                 //picture.File.SaveAs(physicalPath);
             }
 
-            User user = (User)Session["OnlineKullaniciID"];
+            User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
 
             user.Avatar = relativePath + fileName;
 
@@ -104,8 +103,9 @@ namespace Imdb.App.Controllers
 
         List<MoviesSeries> moviesSeriesList;
         public ActionResult WatchList()
-        {   
-            User user = (User)Session["OnlineKullaniciID"];
+        {
+            User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
+
             moviesSeriesList = new List<MoviesSeries>();
             List<MoviesSeriesWatchList> moviesSeriesWatchList = _moviesSeriesWatchListService.GetMoviesSeriesWatchListByWatchList(user.UserID);
             foreach (var item in moviesSeriesWatchList)

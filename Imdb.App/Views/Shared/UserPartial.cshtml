@@ -4,7 +4,7 @@
 <div class="col-md-3 col-sm-12 col-xs-12">
     <div class="user-information">
         <div class="user-img">
-            @if (Model.Avatar == null)
+            @if (Model.Avatar == null || Model.Avatar=="")
             {
                 <a href="#"><img src="~/Content/images/uploads/user-img.png" alt=""><br></a>
             }

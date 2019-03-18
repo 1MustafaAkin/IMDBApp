@@ -22,10 +22,12 @@ namespace Imdb.App.Controllers
         private ApplicationUserManager _userManager;
         private IUserService _userService;
         private IWatchListService _watchListService;
+        //HttpCookie myCookie;
         public AccountController()
         {
             _userService = InstanceFactory.GetInstance<IUserService>();
             _watchListService = InstanceFactory.GetInstance<IWatchListService>();
+            //myCookie = new HttpCookie("ImdbApp");
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -67,6 +69,8 @@ namespace Imdb.App.Controllers
             return View();
         }
 
+        
+
         //
         // POST: /Account/Login
         [HttpPost]
@@ -90,6 +94,10 @@ namespace Imdb.App.Controllers
 
                     Session["OnlineKullanici"] = model.Email;
                     Session["OnlineKullaniciID"] = _userService.GetUsersByUserName(user.UserName);
+                    
+                    //myCookie["UserName"] = model.Email;
+                    //myCookie.Expires = DateTime.Now.AddDays(1);
+                    //Response.Cookies.Add(myCookie);
                     if (roleName != "admin")
                         return RedirectToLocal(returnUrl);
                     else
@@ -184,6 +192,9 @@ namespace Imdb.App.Controllers
 
                     if (!UserManager.IsInRole(user.Id, "admin"))
                         UserManager.AddToRole(user.Id, "normal");
+                    //myCookie["UserName"] = model.Email;
+                    //myCookie.Expires = DateTime.Now.AddDays(1);
+                    //Response.Cookies.Add(myCookie);
                     Session["OnlineKullanici"] = user.Email;
                     Session["OnlineKullaniciID"] = _userService.GetUsersByUserName(user.UserName);
 
@@ -423,7 +434,8 @@ namespace Imdb.App.Controllers
         {
             
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            Session["OnlineKullanici"] = null;
+            //Session["OnlineKullanici"] = null;
+            //Response.Cookies["ImdbApp"].Expires = DateTime.Now.AddDays(-1);
             return RedirectToAction("Index", "Home");
         }
 

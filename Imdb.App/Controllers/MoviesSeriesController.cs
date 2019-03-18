@@ -11,6 +11,7 @@ using Imdb.BLL.Abstract;
 using Imdb.BLL.DependencyResolver.Ninject;
 using Imdb.DAL;
 using Imdb.DATA.Concrete;
+using Microsoft.AspNet.Identity;
 
 namespace Imdb.App.Controllers
 {
@@ -21,6 +22,7 @@ namespace Imdb.App.Controllers
         {
             _moviesSeriesService = InstanceFactory.GetInstance<IMoviesSeriesService>();
             _categoryService = InstanceFactory.GetInstance<ICategoryService>();
+            _userService = InstanceFactory.GetInstance<IUserService>();
             _employeeService = InstanceFactory.GetInstance<IEmployeeService>();
             _moviesSeriesCategoryService = InstanceFactory.GetInstance<IMoviesSeriesCategoryService>();
             _moviesSeriesEmployeeService = InstanceFactory.GetInstance<IMoviesSeriesEmployeeService>();
@@ -29,6 +31,7 @@ namespace Imdb.App.Controllers
         }
 
         private IMoviesSeriesService _moviesSeriesService;
+        private IUserService _userService;
         private ICategoryService _categoryService;
         private IEmployeeService _employeeService;
         private IMoviesSeriesCategoryService _moviesSeriesCategoryService;
@@ -149,7 +152,7 @@ namespace Imdb.App.Controllers
         int sayac = 0;
         public ActionResult MoviesSeriesDetails(int id)
         {
-            User user = (User)Session["OnlineKullaniciID"];
+            User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
             List<MoviesSeriesEmployee> employeesOfMoviesSeries = _moviesSeriesEmployeeService.GetEmployeeByMoviesSeriesId(id);
             List<MoviesSeriesWatchList> moviesSeriesWatchList = _moviesSeriesWatchListService.GetMoviesSeriesWatchListByWatchList(user.UserID);
 
@@ -223,7 +226,7 @@ namespace Imdb.App.Controllers
         public ActionResult AddWatchList(int id)
         {
             MoviesSeriesWatchList moviesSeriesWatchList = new MoviesSeriesWatchList();
-            User user = (User)Session["OnlineKullaniciID"];
+            User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
             moviesSeriesWatchList.MoviesSeriesID = id;
             moviesSeriesWatchList.WatchListID = user.UserID;
             _moviesSeriesWatchListService.Add(moviesSeriesWatchList);

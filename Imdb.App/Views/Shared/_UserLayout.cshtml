@@ -8,7 +8,7 @@
 <html class="openform">
 <head>
     <meta name="viewport" content="width=device-width" />
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
     <title>Open Pediatrics</title>
     <meta charset="UTF-8">
@@ -68,13 +68,14 @@
                         <li><a href="#">Home</a></li>
                         <li> @Html.ActionLink("Movies", "ListOfMovies", "MoviesSeries")</li>
                         <li> @Html.ActionLink("Series", "ListOfSeries", "MoviesSeries")</li>
-                        <li>@Html.ActionLink("News","ListOfNews","News")</li>
+                        <li>@Html.ActionLink("News", "ListOfNews", "News")</li>
                         <li><a href="#">Suggest Me Something</a></li>
                     </ul>
                     <ul class="nav navbar-nav flex-child-menu menu-right">
                         @{
+                            //Request.Cookies["ImdbApp"].Value == null
                             <li><a href="#">Help</a></li>
-                            if (Session["OnlineKullanici"] == null)
+                            if (!User.Identity.IsAuthenticated)
                             {
                                 <li>
                                     @Html.ActionLink("Login", "Login", "Account")
@@ -118,36 +119,36 @@
                     <h4>Account</h4>
                     <ul>
                         <li><a href="@Url.Action("Index", "UserProfiles")">My Account</a></li>
-                        <li><a href="@Url.Action("Register", "WatchList")">Watchlist</a></li> @*//TODO:bu kısımda doğru yönlendirilme yapılacak*@  
+                        <li><a href="@Url.Action("Register", "WatchList")">Watchlist</a></li> @*//TODO:bu kısımda doğru yönlendirilme yapılacak*@
                         @*<li><a href="#">Collections</a></li>
-                        <li><a href="#">User Guide</a></li>*@
+                            <li><a href="#">User Guide</a></li>*@
                     </ul>
                 </div>
                 <div class="flex-child-ft col-md-6">
-            <h4>Movies</h4>
-            <ul>
-                <li><a href="@Url.Action("ListOfMovies","MoviesSeries")">Movie</a></li>
-                <li><a href="@Url.Action("News", "ListOfNews")">News</a></li>
-                
-            </ul>
-        </div>
+                    <h4>Movies</h4>
+                    <ul>
+                        <li><a href="@Url.Action("ListOfMovies","MoviesSeries")">Movie</a></li>
+                        <li><a href="@Url.Action("News", "ListOfNews")">News</a></li>
+
+                    </ul>
+                </div>
                 @*<div class="flex-child-ft item3">
-            <h4>Legal</h4>
-            <ul>
-                <li><a href="#">Terms of Use</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Security</a></li>
-            </ul>
-        </div>*@
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Terms of Use</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Security</a></li>
+                        </ul>
+                    </div>*@
 
                 @*<div class="flex-child-ft item5">
-            <h4>Newsletter</h4>
-            <p>Subscribe to our newsletter system now <br> to get latest news from us.</p>
-            <form action="#">
-                <input type="text" placeholder="Enter your email...">
-            </form>
-            <a href="#" class="btn">Subscribe now <i class="ion-ios-arrow-forward"></i></a>
-        </div>*@
+                        <h4>Newsletter</h4>
+                        <p>Subscribe to our newsletter system now <br> to get latest news from us.</p>
+                        <form action="#">
+                            <input type="text" placeholder="Enter your email...">
+                        </form>
+                        <a href="#" class="btn">Subscribe now <i class="ion-ios-arrow-forward"></i></a>
+                    </div>*@
             </div>
         </div>
         <div class="ft-copyright">
