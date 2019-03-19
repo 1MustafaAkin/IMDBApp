@@ -12,6 +12,9 @@ namespace Imdb.BLL.Abstract
         List<Rating> GetRatingByMoviesID(int id);
         List<Rating> GetRatingByUserID(int id);
         Rating GetRatingByUserAndMovie(int userId,int movieId);
+        Rating GetScoreByUserAndMovie(int userId,int movieId);
+        Rating GetCommentByUserAndMovie(int userId,int movieId);
+        IEnumerable<Rating> GetCommentByUserAndMovieWithInclude(int? movieId, params string[] include);
         List<Rating> GetAll();
         Rating GetRatingById(int? id);
         void Add(Rating rating);

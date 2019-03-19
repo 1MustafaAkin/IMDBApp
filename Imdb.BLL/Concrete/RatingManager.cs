@@ -41,6 +41,16 @@ namespace Imdb.BLL.Concrete
             return _ratingDal.GetAll();
         }
 
+        public Rating GetCommentByUserAndMovie(int userId, int movieId)
+        {
+            return _ratingDal.Get(x => x.UserID == userId && x.MoviesSeriesID == movieId && x.Comment != null);
+        }
+
+        public IEnumerable<Rating> GetCommentByUserAndMovieWithInclude(int? movieId, params string[] include)
+        {
+            return _ratingDal.GetAllWithInclude(x=>x.MoviesSeriesID == movieId && x.Comment != null,include);
+        }
+
         public Rating GetRatingById(int? id)
         {
             return _ratingDal.Get(x => x.RatingID == id);
@@ -59,6 +69,11 @@ namespace Imdb.BLL.Concrete
         public List<Rating> GetRatingByUserID(int id)
         {
             return _ratingDal.GetAll(x => x.UserID == id);
+        }
+
+        public Rating GetScoreByUserAndMovie(int userId, int movieId)
+        {
+            return _ratingDal.Get(x => x.UserID == userId && x.MoviesSeriesID == movieId && x.Score != 0);
         }
 
         public void Update(Rating rating)

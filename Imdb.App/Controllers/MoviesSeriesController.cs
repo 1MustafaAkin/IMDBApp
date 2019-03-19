@@ -159,8 +159,9 @@ namespace Imdb.App.Controllers
             User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
             List<MoviesSeriesEmployee> employeesOfMoviesSeries = _moviesSeriesEmployeeService.GetEmployeeByMoviesSeriesId(id);
             List<MoviesSeriesWatchList> moviesSeriesWatchList = _moviesSeriesWatchListService.GetMoviesSeriesWatchListByWatchList(user.UserID);
-            Rating rating = _ratingService.GetRatingByUserAndMovie(user.UserID,id);
+            Rating rating = _ratingService.GetScoreByUserAndMovie(user.UserID,id);
             ViewBag.rating = rating;
+            ViewBag.comment = _ratingService.GetCommentByUserAndMovie(user.UserID,id);
 
             count = moviesSeriesWatchList.Where(x=>x.MoviesSeriesID == id).ToList().Count();
             if (count != 0)
@@ -174,6 +175,7 @@ namespace Imdb.App.Controllers
                 employees.Add(_employeeService.GetEmployeeById(item.EmployeeID));
             }
             ViewBag.EmployeeOfMoviesSeries = employees;
+            ViewBag.AllComment = _ratingService.GetCommentByUserAndMovieWithInclude(id,"User", "RatingOfMovieSeries");
             return View(_moviesSeriesService.GetMoviesSeriesById(id));
         }
 
@@ -242,14 +244,50 @@ namespace Imdb.App.Controllers
 
         public ActionResult VoteMoviesSeries(int id,short rate)
         {
-            Rating rating = new Rating();
-            rating.MoviesSeriesID = id;
             User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
-            rating.UserID = user.UserID;
-            rating.Score = rate;
-            _ratingService.Add(rating);
+            Rating rating = _ratingService.GetRatingByUserAndMovie(user.UserID, id);
+            if (rating == null)
+            {
+                rating = new Rating();
+                rating.MoviesSeriesID = id;
+                rating.UserID = user.UserID;
+                rating.Score = rate;
+                _ratingService.Add(rating);
+            }
+            else
+            {
+                rating.MoviesSeriesID = id;
+                rating.UserID = user.UserID;
+                rating.Score = rate;
+                _ratingService.Update(rating);
+            }
+            
             ViewBag.rating = rating;
             return View();
+        }
+
+
+        public ActionResult CommentMoviesSeries(int id, FormCollection frm)
+        {
+            User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
+            Rating rating = _ratingService.GetRatingByUserAndMovie(user.UserID, id);
+            if (rating == null)
+            {
+                rating = new Rating();
+                rating.MoviesSeriesID = id;
+                rating.UserID = user.UserID;
+                rating.Comment = frm["comment"];
+                _ratingService.Add(rating);
+            }
+            else
+            {
+                rating.MoviesSeriesID = id;
+                rating.UserID = user.UserID;
+                rating.Comment = frm["comment"];
+                _ratingService.Update(rating);
+            }
+            ViewBag.ratingComment = rating;
+            return RedirectToAction("MoviesSeriesDetails","MoviesSeries",new { id = id });
         }
     }
 }
