@@ -18,9 +18,9 @@ namespace Imdb.BLL.Concrete
             _applicationUserDal = applicationUserDal;
         }
 
-        public ApplicationUser GetApplicationUserByUserId(int id)
+        public ApplicationUser GetApplicationUserByUserName(string name)
         {
-            return _applicationUserDal.Get(x => x.User.UserID == id);
+            return _applicationUserDal.Get(x => x.User.UserName == name);
         }
 
         public void Update(ApplicationUser applicationUser)

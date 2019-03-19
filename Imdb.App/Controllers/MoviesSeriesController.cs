@@ -27,6 +27,8 @@ namespace Imdb.App.Controllers
             _moviesSeriesCategoryService = InstanceFactory.GetInstance<IMoviesSeriesCategoryService>();
             _moviesSeriesEmployeeService = InstanceFactory.GetInstance<IMoviesSeriesEmployeeService>();
             _moviesSeriesWatchListService = InstanceFactory.GetInstance<IMoviesSeriesWatchListService>();
+            _ratingService = InstanceFactory.GetInstance<IRatingService>();
+            _applicationUserService = InstanceFactory.GetInstance<IApplicationUserService>();
             moviesSeriesCategory = new MoviesSeriesCategory();
         }
 
@@ -37,6 +39,8 @@ namespace Imdb.App.Controllers
         private IMoviesSeriesCategoryService _moviesSeriesCategoryService;
         private IMoviesSeriesEmployeeService _moviesSeriesEmployeeService;
         private IMoviesSeriesWatchListService _moviesSeriesWatchListService;
+        private IRatingService _ratingService;
+        private IApplicationUserService _applicationUserService;
         MoviesSeriesCategory moviesSeriesCategory;
 
 
@@ -149,15 +153,17 @@ namespace Imdb.App.Controllers
         }
 
         List<Employee> employees;
-        int sayac = 0;
+        int count = 0;
         public ActionResult MoviesSeriesDetails(int id)
         {
             User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
             List<MoviesSeriesEmployee> employeesOfMoviesSeries = _moviesSeriesEmployeeService.GetEmployeeByMoviesSeriesId(id);
             List<MoviesSeriesWatchList> moviesSeriesWatchList = _moviesSeriesWatchListService.GetMoviesSeriesWatchListByWatchList(user.UserID);
+            Rating rating = _ratingService.GetRatingByUserAndMovie(user.UserID,id);
+            ViewBag.rating = rating;
 
-            sayac = moviesSeriesWatchList.Where(x=>x.MoviesSeriesID == id).ToList().Count();
-            if (sayac != 0)
+            count = moviesSeriesWatchList.Where(x=>x.MoviesSeriesID == id).ToList().Count();
+            if (count != 0)
                 ViewBag.DoesExistMovieInWatchList = true;
             else
                 ViewBag.DoesExistMovieInWatchList = false;
@@ -231,6 +237,19 @@ namespace Imdb.App.Controllers
             moviesSeriesWatchList.WatchListID = user.UserID;
             _moviesSeriesWatchListService.Add(moviesSeriesWatchList);
             return RedirectToAction("MoviesSeriesDetails", "MoviesSeries", new { id = id });
+        }
+
+
+        public ActionResult VoteMoviesSeries(int id,short rate)
+        {
+            Rating rating = new Rating();
+            rating.MoviesSeriesID = id;
+            User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
+            rating.UserID = user.UserID;
+            rating.Score = rate;
+            _ratingService.Add(rating);
+            ViewBag.rating = rating;
+            return View();
         }
     }
 }

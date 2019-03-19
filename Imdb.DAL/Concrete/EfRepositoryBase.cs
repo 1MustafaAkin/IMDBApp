@@ -24,7 +24,6 @@ namespace Imdb.DAL.Concrete
                 //Yeni oluşan bu nesneyi veritabanında bulamayacağımız için bunu yeni eklenecek olarak işaretliyoruz
                 addedEntity.State = EntityState.Added;
                 db.SaveChanges();
-                db.Dispose();
             }
         }
 
@@ -37,7 +36,6 @@ namespace Imdb.DAL.Concrete
                 //Deleted yani entitye abone ol onu silincek diye işaretle kısacısı delete kodunu çalıştıracak
                 deletedEntity.State = EntityState.Deleted;
                 db.SaveChanges();
-                db.Dispose();
             }
         }
 
@@ -50,7 +48,6 @@ namespace Imdb.DAL.Concrete
                 //Modified yani bu entity var veritabanında ona abone ol ve durmunu update olarak işaretle yani kısacası update kodu çalışacak
                 updatedEntity.State = EntityState.Modified;
                 db.SaveChanges();
-                db.Dispose();
             }
         }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imdb.DAL.Abstract
 {
-   public interface IRatingDal : IEntityRepository<Rating>
+    public interface IRatingDal : IEntityRepository<Rating>
     {
 
     }

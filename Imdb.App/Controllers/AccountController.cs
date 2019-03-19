@@ -92,8 +92,7 @@ namespace Imdb.App.Controllers
             {   
                 case SignInStatus.Success:
 
-                    Session["OnlineKullanici"] = model.Email;
-                    Session["OnlineKullaniciID"] = _userService.GetUsersByUserName(user.UserName);
+
                     
                     //myCookie["UserName"] = model.Email;
                     //myCookie.Expires = DateTime.Now.AddDays(1);
@@ -195,8 +194,7 @@ namespace Imdb.App.Controllers
                     //myCookie["UserName"] = model.Email;
                     //myCookie.Expires = DateTime.Now.AddDays(1);
                     //Response.Cookies.Add(myCookie);
-                    Session["OnlineKullanici"] = user.Email;
-                    Session["OnlineKullaniciID"] = _userService.GetUsersByUserName(user.UserName);
+
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

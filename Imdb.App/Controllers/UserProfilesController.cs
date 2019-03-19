@@ -25,14 +25,12 @@ namespace Imdb.App.Controllers
 
         private readonly Context db;
         private IUserService _userService;
-        private IApplicationUserService _applicationUserService;
         private IMoviesSeriesWatchListService _moviesSeriesWatchListService;
         private IMoviesSeriesService _moviesSeriesService;
 
         public UserProfilesController()
         {
             _userService = InstanceFactory.GetInstance<IUserService>();
-            _applicationUserService = InstanceFactory.GetInstance<IApplicationUserService>();
             _moviesSeriesWatchListService = InstanceFactory.GetInstance<IMoviesSeriesWatchListService>();
             _moviesSeriesService = InstanceFactory.GetInstance<IMoviesSeriesService>();
             if (db == null)

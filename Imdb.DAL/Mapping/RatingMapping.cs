@@ -14,8 +14,8 @@ namespace Imdb.DAL.Mapping
         {
             HasKey(x=>x.RatingID);
 
-            Property(x => x.Comment).HasMaxLength(500);
-            Property(x => x.Score).HasColumnType("smallint").IsRequired();
+            Property(x => x.Comment).HasMaxLength(500).IsOptional();
+            Property(x => x.Score).HasColumnType("smallint").IsOptional();
 
             HasRequired(x => x.User).WithMany(x => x.Ratings).HasForeignKey(x => x.UserID);
             HasRequired(x => x.RatingOfMovieSeries).WithMany(x => x.Ratings).HasForeignKey(x => x.MoviesSeriesID);

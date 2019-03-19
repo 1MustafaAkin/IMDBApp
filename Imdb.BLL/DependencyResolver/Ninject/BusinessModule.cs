@@ -58,6 +58,9 @@ namespace Imdb.BLL.DependencyResolver.Ninject
             Bind<IMoviesSeriesWatchListService>().To<MoviesSeriesWatchListManager>().InSingletonScope();
             Bind<IMoviesSeriesWatchListDal>().To<EfMovieSeriesWatchListDal>().InSingletonScope();
 
+            Bind<IRatingService>().To<RatingManager>().InSingletonScope();
+            Bind<IRatingDal>().To<EfRatingDal>().InSingletonScope();
+
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Imdb.BLL.Abstract
 {
     public interface IApplicationUserService
     {
-        ApplicationUser GetApplicationUserByUserId(int id);
+        ApplicationUser GetApplicationUserByUserName(string name);
         void Update(ApplicationUser applicationUser);
     }
 }
