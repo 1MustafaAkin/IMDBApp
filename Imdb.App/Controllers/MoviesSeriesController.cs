@@ -287,6 +287,7 @@ namespace Imdb.App.Controllers
                 _ratingService.Update(rating);
             }
             ViewBag.ratingComment = rating;
+            ViewBag.AllComment = _ratingService.GetCommentByUserAndMovieWithInclude(id, "User", "RatingOfMovieSeries");
             return RedirectToAction("MoviesSeriesDetails","MoviesSeries",new { id = id });
         }
     }

@@ -286,33 +286,37 @@
                                                 <option value="saab">-- Choose option 2--</option>
                                             </select>
                                         </div>
+                                        @{  
+                                                foreach (var item in ViewBag.AllComment)
+                                                {
 
-                                        @foreach (var item in ViewBag.AllComment)
-                                        {
-                                            <div class="mv-user-review-item">
-                                                <div class="user-infor">
-                                                    <img src="@Url.Content(item.User.Avatar)" alt="">
-                                                    <div>
-                                                        <span class="no-star" data-rate="@item.Score">
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                            <i class="ion-android-star"></i>
-                                                        </span>
-                                                        <p class="time">
-                                                            @DateTime.Now.ToShortDateString() <a href="#">@item.User.UserName</a>
-                                                        </p>
+                                                <div class="mv-user-review-item">
+                                                    <div class="user-infor">
+                                                        <img src="@Url.Content(item.User.Avatar)" alt="">
+                                                        <div>
+                                                            <span class="no-star">
+                                                                @for (int j = 10; j >= 1; j--)
+                                                                {
+                                                                    if (j <= 10 - item.Score)
+                                                                    {
+                                                                        <i class="ion-android-star last"></i>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <i class="ion-android-star"></i>
+                                                                    }
+                                                                }
+                                                            </span>
+                                                            <p class="time">
+                                                                @DateTime.Now.ToShortDateString() <a href="#">@item.User.UserName</a>
+                                                            </p>
+                                                        </div>
                                                     </div>
+                                                    <p>@item.Comment</p>
                                                 </div>
-                                                <p>@item.Comment</p>
-                                            </div>
+                                            }
                                         }
+
 
                                         <div class="topbar-filter">
                                             <label>Reviews per page:</label>
@@ -615,16 +619,18 @@
         })
     });
 
-    $("#review").click(function () {
-        var i = 10;
-        var score = $(".no-star").data("rate");
-        $(".ion-android-star").each(function () {
-            if (i < 10 - score) {
-                $(this).removeClass("ion-android-star").addClass("ion-android-star last");
-            }
-            i--;
-        })
-    })
+
+    //$("#review").click(function () {
+    //    var i = 10;
+    //    var score = $(".no-star").data("rate");
+    //    alert(score)
+    //    $(".ion-android-star").each(function () {
+    //        if (i < 10 - score) {
+    //            $(this).removeClass("ion-android-star").addClass("ion-android-star last");
+    //        }
+    //        i--;
+    //    })
+    //})
 
     //$("#btnComment").click(function () {
     //    var comment = $("#txtComment").val();
