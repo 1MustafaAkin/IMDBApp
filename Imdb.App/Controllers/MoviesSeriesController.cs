@@ -331,5 +331,36 @@ namespace Imdb.App.Controllers
             ViewBag.AllComment = _ratingService.GetCommentByUserAndMovieWithInclude(id, "User", "RatingOfMovieSeries");
             return RedirectToAction("MoviesSeriesDetails","MoviesSeries",new { id = id });
         }
+
+        public ActionResult SuggestMeMovie()
+        {
+            int id;
+            id = 1;
+            //Random rnd = new Random();
+            //MoviesSeries movies_max_id = _moviesSeriesService.maxid();
+            //int max_id = movies_max_id;
+            //id = rnd.Next(1,max_id);            
+            User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
+            List<MoviesSeriesEmployee> employeesOfMoviesSeries = _moviesSeriesEmployeeService.GetEmployeeByMoviesSeriesId(id);
+            List<MoviesSeriesWatchList> moviesSeriesWatchList = _moviesSeriesWatchListService.GetMoviesSeriesWatchListByWatchList(user.UserID);
+            Rating rating = _ratingService.GetScoreByUserAndMovie(user.UserID, id);
+            ViewBag.rating = rating;
+            ViewBag.comment = _ratingService.GetCommentByUserAndMovie(user.UserID, id);
+
+            count = moviesSeriesWatchList.Where(x => x.MoviesSeriesID == id).ToList().Count();
+            if (count != 0)
+                ViewBag.DoesExistMovieInWatchList = true;
+            else
+                ViewBag.DoesExistMovieInWatchList = false;
+
+            employees = new List<Employee>();
+            foreach (var item in employeesOfMoviesSeries)
+            {
+                employees.Add(_employeeService.GetEmployeeById(item.EmployeeID));
+            }
+            ViewBag.EmployeeOfMoviesSeries = employees;
+            ViewBag.AllComment = _ratingService.GetCommentByUserAndMovieWithInclude(id, "User", "RatingOfMovieSeries");
+            return View(_moviesSeriesService.GetMoviesSeriesById(id));
+        }
     }
 }

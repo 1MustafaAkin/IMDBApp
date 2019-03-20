@@ -15,8 +15,7 @@
     <AssemblyName>Imdb.App</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>
-    </Use64BitIISExpress>
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -319,6 +318,7 @@
     <Content Include="Views\MoviesSeries\AddEmployeeToMoviesSeries.cshtml" />
     <Content Include="Views\UserProfiles\WatchList.cshtml" />
     <Content Include="Views\Shared\UserPartial.cshtml" />
+    <Content Include="Views\MoviesSeries\SuggestMeMovie.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
