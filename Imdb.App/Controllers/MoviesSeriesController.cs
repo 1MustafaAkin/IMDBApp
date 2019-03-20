@@ -12,6 +12,7 @@ using Imdb.BLL.DependencyResolver.Ninject;
 using Imdb.DAL;
 using Imdb.DATA.Concrete;
 using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace Imdb.App.Controllers
 {
@@ -142,10 +143,50 @@ namespace Imdb.App.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ListOfMovies()
+        public ActionResult ListOfMovies(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(_moviesSeriesService.GetMoviesSeriesByIsMovies());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc": "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            var movies = _moviesSeriesService.GetMoviesSeriesByIsMovies();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(s => s.MovieSeriesName.Contains(searchString));
+
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    movies = movies.OrderByDescending(s => s.MovieSeriesName);
+                    break;
+                case "Date":
+                    movies = movies.OrderBy(s => s.ReleaseDate);
+                    break;
+                case "date_desc":
+                    movies = movies.OrderByDescending(s => s.ReleaseDate);
+                    break;
+                default:  //Name ascending
+                    movies = movies.OrderBy(s => s.MovieSeriesName);
+                    break;
+            }
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            return View(_moviesSeriesService.GetMoviesSeriesByIsMovies().ToPagedList(pageNumber, pageSize));
         }
+    
 
         public ActionResult ListOfSeries()
         {

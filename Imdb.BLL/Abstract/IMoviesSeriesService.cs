@@ -16,7 +16,8 @@ namespace Imdb.BLL.Abstract
         List<MoviesSeries> GetMoviesSeriesListById(int id);
         MoviesSeries GetMoviesSeriesById(int? id);
         List<MoviesSeries> GetMoviesSeriesByIsSeries();
-        List<MoviesSeries> GetMoviesSeriesByIsMovies();
+        IEnumerable<MoviesSeries> GetMoviesSeriesByIsMovies();
+        //List<MoviesSeries> GetMoviesSeriesByIsMovies();
         void Add(MoviesSeries moviesSeries);
         void Update(MoviesSeries moviesSeries);
         void Delete(MoviesSeries moviesSeries);

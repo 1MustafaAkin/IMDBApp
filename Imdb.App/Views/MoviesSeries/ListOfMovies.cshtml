@@ -1,4 +1,6 @@
-﻿
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.IPagedList<Imdb.DATA.Concrete.MoviesSeries>
 @{
     ViewBag.Title = "ListOfMovies";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -48,7 +50,7 @@
                     <div class="topbar-filter fw">
 
                         @* alta kaç adet film varsa dinamik basılacak *@
-                        <p>Found <span>1,608 movies</span> in total</p>
+                        <p>Found <span>@Model.TotalItemCount</span> in total</p>
                         <label>Sort by:</label>
                         <select>
                             <option value="popularity">Popularity Descending</option>
@@ -88,14 +90,10 @@
                         </select>
 
                         <div class="pagination2">
-                            <span>Page 1 of 2:</span>
-                            <a class="active" href="#">1</a>
-                            <a href="#">2345</a>
-                            <a href="#">3</a>
-                            <a href="#">5</a>
-                            <a href="#">78</a>
-                            <a href="#">79</a>
-                            <a href="#"><i class="ion-arrow-right-b"></i></a>
+                            @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                            @Html.PagedListPager(Model, page => Url.Action("ListOfMovies", "MoviesSeries",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
                         </div>
                     </div>
                 </div>

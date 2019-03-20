@@ -64,7 +64,7 @@ namespace Imdb.BLL.Concrete
             return _moviesSeriesDal.GetAll(x => x.IsSeries == true);
         }
 
-        public List<MoviesSeries> GetMoviesSeriesByIsMovies()
+        public IEnumerable<MoviesSeries> GetMoviesSeriesByIsMovies()
         {
             return _moviesSeriesDal.GetAll(x => x.IsSeries == false);
         }
