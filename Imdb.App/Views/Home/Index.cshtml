@@ -59,7 +59,7 @@
                                                             <img src="@Url.Content(item.Photos)" alt="" width="185" height="284">
                                                         </div>
                                                         <div class="hvr-inner">
-                                                            <a href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+                                                            <a href="@Url.Action("MoviesSeriesDetails", "MoviesSeries", new {  id = item.MovieSeriesID })"> Read more <i class="ion-android-arrow-dropright"></i> </a>
                                                         </div>
                                                         <div class="title-in">
                                                             <h6><a href="@Url.Action("MoviesSeriesDetails", "MoviesSeries", new {  id = item.MovieSeriesID })">@item.MovieSeriesName</a></h6>
@@ -308,29 +308,34 @@
                     </div>
                     <div class="tabs">
                         <ul class="tab-links-2">
-                            <li><a href="#tab21">#Popular</a></li>
-                            <li class="active"><a href="#tab22"> #Coming soon</a></li>
+                            <li class="active"><a href="#tab21">#Popular</a></li>
+                            <li ><a href="#tab22"> #Coming soon</a></li>
                             <li><a href="#tab23">  #Top rated  </a></li>
                             <li><a href="#tab24"> #Most reviewed</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div id="tab21" class="tab">
+                            <div id="tab21" class="tab active">
                                 <div class="row">
                                     <div class="slick-multiItem">
-                                        <div class="slide-it">
-                                            <div class="movie-item">
-                                                <div class="mv-img">
-                                                    <img src="../../Content/images/uploads/mv-item1.jpg" alt="" width="185" height="284">
+                                        @{
+                                            foreach (var item in Model)
+                                            {
+                                                <div class="slide-it">
+                                                    <div class="movie-item">
+                                                        <div class="mv-img">
+                                                            <img src="@Url.Content(item.Photos)" alt="" width="185" height="284">
+                                                        </div>
+                                                        <div class="hvr-inner">
+                                                            <a href="@Url.Action("MoviesSeriesDetails", "MoviesSeries", new {  id = item.MovieSeriesID })"> Read more <i class="ion-android-arrow-dropright"></i> </a>
+                                                        </div>
+                                                        <div class="title-in">
+                                                            <h6><a href="@Url.Action("MoviesSeriesDetails", "MoviesSeries", new {  id = item.MovieSeriesID })">@item.MovieSeriesName</a></h6>
+                                                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="hvr-inner">
-                                                    <a href="moviesingle.html"> Read more <i class="ion-android-arrow-dropright"></i> </a>
-                                                </div>
-                                                <div class="title-in">
-                                                    <h6><a href="#">Interstellar</a></h6>
-                                                    <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            }
+                                        }
                                         <div class="slide-it">
                                             <div class="movie-item">
                                                 <div class="mv-img">
@@ -390,7 +395,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="tab22" class="tab active">
+                            <div id="tab22" class="tab">
                                 <div class="row">
                                     <div class="slick-multiItem">
                                         <div class="slide-it">
