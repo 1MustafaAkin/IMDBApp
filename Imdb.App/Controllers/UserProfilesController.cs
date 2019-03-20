@@ -82,11 +82,11 @@ namespace Imdb.App.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ChangePassword(int id, FormCollection form)
+        public ActionResult ChangePassword(int id, string newPassword)
         {
             User user = _userService.GetUsersById(id);
             ApplicationUser appUser = db.Users.FirstOrDefault(x => x.User.UserID == user.UserID);
-            user.Password = form["NewPassword"];
+            user.Password = newPassword;
 
             var provider = new DpapiDataProtectionProvider("Imdb.App");
             var userStore = new UserStore<ApplicationUser>(db);

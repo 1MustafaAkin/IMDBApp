@@ -55,33 +55,35 @@
                             </div>
                         </div>
                     }
-                    @using (Html.BeginForm("ChangePassword", "UserProfiles", new { id = Model.UserID }, FormMethod.Post))
-                    {
-                        <h4>02. Change password</h4>
-                        <div class="row">
-                            <div class="col-md-6 form-it">
-                                <label>Old Password</label>
-                                <input type="text" placeholder="**********">
-                            </div>
+                    @*@using (Html.BeginForm("ChangePassword", "UserProfiles", new { id = Model.UserID }, FormMethod.Post))
+                        {*@
+                    <h4>02. Change password</h4>
+                    <div class="row">
+                        <div class="col-md-6 form-it">
+                            <label>Old Password</label>
+                            <input type="password" id="oldPass" name="OldPassword" placeholder="**********">
+                            <label id="validateOld" style="display:none;">Eski şifreniz yanlış</label>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 form-it">
-                                <label>New Password</label>
-                                <input type="text" placeholder="***************">
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-it">
+                            <label>New Password</label>
+                            <input type="password" id="newPass" name="NewPassword" placeholder="***************">
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 form-it">
-                                <label>Confirm New Password</label>
-                                <input type="text" name="NewPassword" placeholder="*************** ">
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-it">
+                            <label>Confirm New Password</label>
+                            <input type="password" id="newPassAgain" name="NewPasswordAgain" placeholder="*************** ">
+                            <label id="validateMatch" style="display:none;">Şifreler Eşleşmiyor</label>
                         </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <input class="submit" type="submit" value="change">
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input class="submit" id="btnSave" type="button" value="change" />
                         </div>
-                    }
+                    </div>
+                    @*}*@
                 </div>
             </div>
         </div>
@@ -92,17 +94,53 @@
 @* TODO *@
 @* üstte type ı button yap ajax la iyileştir burasını *@
 
-@*@section scripts{
-        <script>
-            $("#btnSaveProfile").click(function () {
-                var user = $('#btnSaveProfile').attr("data-user");
-                $.ajax({
-                    method: "post",
-                    url: "@Url.Action("UpdateProfile", "UserProfiles")",
-                    data: user
-                })
-            })
-        </script>
 
-    }*@
+@*<script>
+        $("#btnSaveProfile").click(function () {
+            var user = $('#btnSaveProfile').attr("data-user");
+            $.ajax({
+                method: "post",
+                url: "@Url.Action("UpdateProfile", "UserProfiles")",
+                data: user
+            })
+        })
+    </script>*@
+@section scripts {
+    <script>
+    $('#btnSave').click(function () {
+        var oldPassword = $("#oldPass").val();
+        var newPassword = $("#newPass").val();
+        var newPasswordAgain = $("#newPassAgain").val();
+        if (oldPassword != '@Model.Password') {
+            $("#validateOld").css("display", "block");
+            if (newPassword == "" && newPasswordAgain
+                == "" && newPassword != newPasswordAgain) {
+                $("#validateMatch").css("display", "block");
+            }
+        } else if (newPassword == "" && newPasswordAgain
+            == "" && newPassword != newPasswordAgain) {
+            $("#validateMatch").css("display", "block");
+            if (oldPassword != '@Model.Password' && oldPassword == "") {
+                $("#validateOld").css("display", "block");
+            }
+        } else {
+            $.ajax({
+                method: "Post",
+                url: "/UserProfiles/ChangePassword/",
+                data: { id: @Model.UserID , newPassword: newPassword },
+                success: function () {
+                    $("#validateMatch").css("display", "block" ,"background-color" , "green").text("Şifreniz değiştirildi");
+                }
+
+            });
+        }
+
+
+    });
+    </script>
+}
+
+
+
+
 
