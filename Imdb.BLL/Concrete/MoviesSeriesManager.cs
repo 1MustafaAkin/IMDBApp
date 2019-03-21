@@ -73,5 +73,15 @@ namespace Imdb.BLL.Concrete
         {
             return _moviesSeriesDal.GetAll(x => x.MovieSeriesID == id);
         }
+
+        public IEnumerable<MoviesSeries> GetMoviesSeriesByIsMoviesOrderBy()
+        {
+            return _moviesSeriesDal.GetAll(x => x.IsSeries == false).OrderBy(x => x.MovieSeriesName).ToList();
+        }
+
+        public IEnumerable<MoviesSeries> GetMoviesSeriesByIsMoviesOrderByDescending()
+        {
+            return _moviesSeriesDal.GetAll(x => x.IsSeries == false).OrderByDescending(x => x.MovieSeriesName).ToList();
+        }
     }
 }

@@ -143,48 +143,45 @@ namespace Imdb.App.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ListOfMovies(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult ListOfMovies(string sortOrder, int? page)
         {
+            if (sortOrder == null)
+                sortOrder = "nameDesc";
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc": "Date";
 
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
+            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            //ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc": "Date";
 
-            ViewBag.CurrentFilter = searchString;
-            var movies = _moviesSeriesService.GetMoviesSeriesByIsMovies();
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                movies = movies.Where(s => s.MovieSeriesName.Contains(searchString));
+            //if (searchString != null)
+            //{
+            //    page = 1;
+            //}
+            //else
+            //{
+            //    searchString = currentFilter;
+            //}
 
-            }
+            //ViewBag.CurrentFilter = searchString;
+            var movies = _moviesSeriesService.GetMoviesSeriesByIsMovies().OrderByDescending(x => x.MovieSeriesName);
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    movies = movies.Where(s => s.MovieSeriesName.Contains(searchString));
+
+            //}
             switch (sortOrder)
             {
-                case "name_desc":
-                    movies = movies.OrderByDescending(s => s.MovieSeriesName);
+                case "nameDesc":
+                    movies = _moviesSeriesService.GetMoviesSeriesByIsMovies().OrderByDescending(x => x.MovieSeriesName);
                     break;
-                case "Date":
-                    movies = movies.OrderBy(s => s.ReleaseDate);
-                    break;
-                case "date_desc":
-                    movies = movies.OrderByDescending(s => s.ReleaseDate);
-                    break;
-                default:  //Name ascending
-                    movies = movies.OrderBy(s => s.MovieSeriesName);
+                case "nameAsc":
+                    movies = _moviesSeriesService.GetMoviesSeriesByIsMovies().OrderBy(x => x.MovieSeriesName);
                     break;
             }
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
 
-            return View(_moviesSeriesService.GetMoviesSeriesByIsMovies().ToPagedList(pageNumber, pageSize));
+            return View(movies.ToPagedList(pageNumber, pageSize));
         }
     
 
