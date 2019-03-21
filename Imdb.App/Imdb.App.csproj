@@ -319,6 +319,8 @@
     <Content Include="Views\UserProfiles\WatchList.cshtml" />
     <Content Include="Views\Shared\UserPartial.cshtml" />
     <Content Include="Views\MoviesSeries\SuggestMeMovie.cshtml" />
+    <Content Include="Views\News\ListOfNews.cshtml" />
+    <Content Include="Views\News\NewsDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
