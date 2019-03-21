@@ -17,6 +17,7 @@ namespace Imdb.DATA.Concrete
         public string Trailer { get; set; }
         public string Photos { get; set; }
         public bool IsSeries { get; set; }
+        public decimal? AverageRating { get; set; }
 
         public virtual List<MoviesSeriesCategory> CategoriesOfMovieSeries { get; set; }
         public virtual List<MoviesSeriesEmployee> EmployeesOfMovieSeries { get; set; }

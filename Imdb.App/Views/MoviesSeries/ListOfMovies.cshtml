@@ -75,7 +75,14 @@
                                     </div>
                                     <div class="mv-item-infor">
                                         <h6><a href="#">@item.MovieSeriesName</a></h6>
-                                        <p class="rate"><i class="ion-android-star"></i><span>8.1</span> /10</p>
+                                        @if (item.AverageRating != null)
+                                        {
+                                            <p class="rate"><i class="ion-android-star"></i><span>@String.Format("{0:0.0}", item.AverageRating)</span> /10</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="rate"><i class="ion-android-star"></i><span>0</span> /10</p>
+                                        }
                                     </div>
                                 </div>
                             }

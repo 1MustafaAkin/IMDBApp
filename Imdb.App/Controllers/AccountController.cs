@@ -185,6 +185,7 @@ namespace Imdb.App.Controllers
                     userConcrete.FirstName = model.User.FirstName;
                     userConcrete.LastName = model.User.LastName;
                     userConcrete.Email = model.User.Email;
+                    userConcrete.Avatar = "~/Content/images/uploads/user-img.png";
                     watchList.WatchListName = userConcrete.UserName + "'s WatchList";
                     userConcrete.WatchList = watchList;
                     user.User = userConcrete;

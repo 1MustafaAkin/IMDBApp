@@ -42,68 +42,57 @@
 
                             }
                         </div>*@
-
-                    <div class="progress" style="height:50px;">
-                        <div class="progress" style="height:5em;">
-                            <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 79%;" aria-valuenow="79" aria-valuemin="0" aria-valuemax="100">7.9</div>
-                        </div>
-                        @*<div class="rate-star">
-                                <p>Rate This Movie:  </p>
-                                <form id="user-rating-form">
-
-                                    <span class="user-rating" style="width:275px">
-                                        @if (ViewBag.rating == null)
+                    @{
+                        double p = 0.0;
+                        if (Model.AverageRating != null)
+                        {
+                            p = (double)Model.AverageRating * 10;
+                        }
+                        else
+                        {
+                            p = 0;
+                        }
+                        if (p == 0)
+                        {
+                            <div hidden class="progress" style="height:50px;">
+                                <div class="progress" style="height:5em;">
+                                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: @p%;" aria-valuenow="79" aria-valuemin="0" aria-valuemax="100">
+                                        @if (Model.AverageRating != null)
                                         {
-                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="10"><span class="star"></span>
-
-                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="9"><span class="star"></span>
-
-                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="8"><span class="star"></span>
-
-                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="7"><span class="star"></span>
-
-                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="6"><span class="star"></span>
-
-                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="5"><span class="star"></span>
-
-                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="4"><span class="star"></span>
-
-                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="3"><span class="star"></span>
-
-                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="2"><span class="star"></span>
-
-                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="1"><span class="star"></span>
+                                            <p class="rate" style="margin-top:12px;color:yellow;"><i class="ion-android-star"></i><span>@String.Format("{0:0.0}", Model.AverageRating)</span> /10</p>
                                         }
                                         else
                                         {
-                                            var s = ViewBag.rating;
-                                            for (int i = 1; i <= 10; i++)
-                                            {
-                                                if (i > 10 - s.Score)
-                                                {
-                                                    <input type="radio" checked name="rating+'@i'" value="@i"><span class="star"></span>
-                                                }
-                                                else
-                                                {
-                                                    <input type="radio" name="rating" value="@i"><span class="nostar"></span>
-                                                }
-
-                                            }
+                                            <p class="rate" style="margin-top:12px;color:yellow;"><i class="ion-android-star"></i><span>0</span> /10</p>
                                         }
+                                    </div>
+                                </div>
+                            </div>
+                            <h1 class="bd-hd" style="color:lightblue">Bu Filme Daha Önce Oy Verilmedi</h1>
+                        }
+                        else
+                        {
+                            <div class="progress" style="height:50px;">
+                                <div class="progress" style="height:5em;">
+                                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: @p%;" aria-valuenow="79" aria-valuemin="0" aria-valuemax="100">
+                                        @if (Model.AverageRating != null)
+                                        {
+                                            <p class="rate" style="margin-top:12px;color:yellow;"><i class="ion-android-star"></i><span>@String.Format("{0:0.0}", Model.AverageRating)</span> /10</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="rate" style="margin-top:12px;color:yellow;"><i class="ion-android-star"></i><span>0</span> /10</p>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
-                                    </span>
 
-                                </form>
-                                @if (ViewBag.rating == null)
-                                {
-                                    <button type="button" style="float:right" class="btn btn-danger" id="btnVote">Vote</button>
-                                }
-                                else
-                                {
-                                    <button type="button" disabled style="float:right" class="btn btn-danger" id="btnVote">Vote</button>
-                                }
-                            </div>*@
-                    </div>
+                    }
+
+
+
 
                     <div class="movie-tabs" style="margin-top:20px;">
                         <div class="tabs">
@@ -115,7 +104,7 @@
                                         </div>
                                         <div class="col-md-8 col-sm-12 col-xs-12">
                                             <p>@Url.Content(Model.Description)</p>
-                                     
+
                                             <div class="mvcast-item">
                                                 @*//TODO: buraya filmin oyuncularının ismi databaseden çekilecek.*@
                                                 @*@foreach (var item in ViewBag.EmployeeOfMoviesSeries)

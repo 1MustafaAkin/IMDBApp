@@ -21,7 +21,14 @@
                                     <span class="blue"><a href="#">Sci-fi</a></span>
                                 </div>
                                 <h6><a href="@Url.Action("MoviesSeriesDetails", "MoviesSeries", new {  id = item.MovieSeriesID })">@item.MovieSeriesName</a></h6>
-                                <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                @if (item.AverageRating != null)
+                                {
+                                    <p><i class="ion-android-star"></i><span>@String.Format("{0:0.0}", item.AverageRating)</span> /10</p>
+                                }
+                                else
+                                {
+                                    <p><i class="ion-android-star"></i><span>0</span> /10</p>
+                                }
                             </div>
                         </div>
                     }
@@ -63,7 +70,14 @@
                                                         </div>
                                                         <div class="title-in">
                                                             <h6><a href="@Url.Action("MoviesSeriesDetails", "MoviesSeries", new {  id = item.MovieSeriesID })">@item.MovieSeriesName</a></h6>
-                                                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                                            @if (item.AverageRating != null)
+                                                            {
+                                                                <p><i class="ion-android-star"></i><span>@String.Format("{0:0.0}", item.AverageRating)</span> /10</p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p><i class="ion-android-star"></i><span>0</span> /10</p>
+                                                            }
                                                         </div>
                                                     </div>
                                                 </div>
@@ -330,7 +344,14 @@
                                                         </div>
                                                         <div class="title-in">
                                                             <h6><a href="@Url.Action("MoviesSeriesDetails", "MoviesSeries", new {  id = item.MovieSeriesID })">@item.MovieSeriesName</a></h6>
-                                                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                                                            @if (item.AverageRating != null)
+                                                            {
+                                                                <p><i class="ion-android-star"></i><span>@String.Format("{0:0.0}", item.AverageRating)</span> /10</p>
+                                                            }
+                                                            else
+                                                            {
+                                                                <p><i class="ion-android-star"></i><span>0</span> /10</p>
+                                                            }
                                                         </div>
                                                     </div>
                                                 </div>

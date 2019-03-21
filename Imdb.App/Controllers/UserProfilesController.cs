@@ -50,13 +50,10 @@ namespace Imdb.App.Controllers
             var physicalPath = "";
             var relativePath = "";
             if (picture.File != null && picture.File.ContentLength > 0)
-            {
+            {   
                 relativePath = "~/Content/images/uploads/" + Path.GetFileName(picture.File.FileName);
                 physicalPath = Server.MapPath(relativePath);
                 picture.File.SaveAs(physicalPath);
-                //fileName = Path.GetFileName(picture.File.FileName);
-                //physicalPath = Path.Combine(Server.MapPath("~/Content/images/uploads/"), fileName);
-                //picture.File.SaveAs(physicalPath);
             }
 
             User user = _userService.GetUsersByUserName(User.Identity.GetUserName());

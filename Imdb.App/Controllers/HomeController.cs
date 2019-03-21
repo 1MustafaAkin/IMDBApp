@@ -21,13 +21,34 @@ namespace Imdb.App.Controllers
         public HomeController()
         {
             _moviesSeriesService = InstanceFactory.GetInstance<IMoviesSeriesService>();
+            _ratingService = InstanceFactory.GetInstance<IRatingService>();
         }
 
         private IMoviesSeriesService _moviesSeriesService;
+        private IRatingService _ratingService;
 
         // GET: Home
         public ActionResult Index()
-        {
+        {   
+            //int score = 0;
+            //decimal averageImdb;
+            //int ratingCount = 0;
+            //List<MoviesSeries> movies;
+
+
+            //foreach (var movie in _moviesSeriesService.GetAll())
+            //{
+            //    ratingCount = _ratingService.GetRatingByMoviesID(movie.MovieSeriesID).Count();
+            //    foreach (var item in _ratingService.GetRatingByMoviesID(movie.MovieSeriesID))
+            //    {
+            //        score += item.Score;
+            //    }
+            //    averageImdb = (decimal)score / ratingCount;
+            //    movies.Add(averageImdb);
+            //}
+            
+            
+            //ViewBag.AllRating = Decimal.Round(averageImdb, 1);
             return View(_moviesSeriesService.GetAll());
         }
 

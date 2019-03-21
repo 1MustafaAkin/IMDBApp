@@ -59,9 +59,8 @@
                     <div class="movie-rate">
                         <div class="rate">
                             <i class="ion-android-star"></i> @*TODO (filmin ratint değeri buraya databaseden çekilecek)*@
-                            <p>
-                                @*<span>@Url.Content(Model.Ratings)</span> /10<br>*@
-                                @*<span class="rv">56 Reviews</span>*@
+                            <p style="font-size:20px">
+                                @String.Format("{0:0.0}", @Model.AverageRating)
                             </p>
                         </div>
                         <div class="rate-star">
@@ -192,30 +191,30 @@
                                             <div class="mv-user-review-item">
 
                                                 @*<div class="no-star">
-                                                    <form id="user-rating-form">
-                                                        <span class="user-rating" style="width:275px">
-                                                            <input type="radio" name="rating" value="10"><span class="nostar"></span>
+                                                        <form id="user-rating-form">
+                                                            <span class="user-rating" style="width:275px">
+                                                                <input type="radio" name="rating" value="10"><span class="nostar"></span>
 
-                                                            <input type="radio" name="rating" value="9"><span class="nostar"></span>
+                                                                <input type="radio" name="rating" value="9"><span class="nostar"></span>
 
-                                                            <input type="radio" name="rating" value="8"><span class="nostar"></span>
+                                                                <input type="radio" name="rating" value="8"><span class="nostar"></span>
 
-                                                            <input type="radio" name="rating" value="7"><span class="nostar"></span>
+                                                                <input type="radio" name="rating" value="7"><span class="nostar"></span>
 
-                                                            <input type="radio" name="rating" value="6"><span class="nostar"></span>
+                                                                <input type="radio" name="rating" value="6"><span class="nostar"></span>
 
-                                                            <input type="radio" name="rating" value="5"><span class="nostar"></span>
+                                                                <input type="radio" name="rating" value="5"><span class="nostar"></span>
 
-                                                            <input type="radio" name="rating" value="4"><span class="nostar"></span>
+                                                                <input type="radio" name="rating" value="4"><span class="nostar"></span>
 
-                                                            <input type="radio" name="rating" value="3"><span class="nostar"></span>
+                                                                <input type="radio" name="rating" value="3"><span class="nostar"></span>
 
-                                                            <input type="radio" name="rating" value="2"><span class="nostar"></span>
+                                                                <input type="radio" name="rating" value="2"><span class="nostar"></span>
 
-                                                            <input type="radio" name="rating" value="1"><span class="nostar"></span>
-                                                        </span>
-                                                    </form>
-                                                </div>*@
+                                                                <input type="radio" name="rating" value="1"><span class="nostar"></span>
+                                                            </span>
+                                                        </form>
+                                                    </div>*@
                                                 <p class="time">
                                                     @*// TODO: kullanıcının yorum yaptığı tarih ve nicki databaseden çekilecek*@
                                                     17 December 2016 by <a href="#"> hawaiipierson</a>
@@ -285,9 +284,9 @@
                                                 <option value="saab">-- Choose option 2--</option>
                                             </select>
                                         </div>
-                                        @{  
-                                                foreach (var item in ViewBag.AllComment)
-                                                {
+                                        @{
+                                            foreach (var item in ViewBag.AllComment)
+                                            {
 
                                                 <div class="mv-user-review-item">
                                                     <div class="user-infor">

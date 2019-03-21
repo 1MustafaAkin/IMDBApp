@@ -198,8 +198,22 @@ namespace Imdb.App.Controllers
             List<MoviesSeriesEmployee> employeesOfMoviesSeries = _moviesSeriesEmployeeService.GetEmployeeByMoviesSeriesId(id);
             List<MoviesSeriesWatchList> moviesSeriesWatchList = _moviesSeriesWatchListService.GetMoviesSeriesWatchListByWatchList(user.UserID);
             Rating rating = _ratingService.GetScoreByUserAndMovie(user.UserID,id);
+            MoviesSeries moviesSeries = _moviesSeriesService.GetMoviesSeriesById(id);
+
             ViewBag.rating = rating;
             ViewBag.comment = _ratingService.GetCommentByUserAndMovie(user.UserID,id);
+            ViewBag.AllComment = _ratingService.GetCommentByUserAndMovieWithInclude(id, "User", "RatingOfMovieSeries");
+
+            int score=0;
+            decimal averageImdb;
+            int ratingCount = _ratingService.GetRatingByMoviesID(id).Count();
+            foreach (var item in _ratingService.GetRatingByMoviesID(id))
+            {
+                score += item.Score;
+            }
+
+            averageImdb = (decimal)score / ratingCount;
+            moviesSeries.AverageRating = Decimal.Round(averageImdb,1);
 
             count = moviesSeriesWatchList.Where(x=>x.MoviesSeriesID == id).ToList().Count();
             if (count != 0)
@@ -213,7 +227,9 @@ namespace Imdb.App.Controllers
                 employees.Add(_employeeService.GetEmployeeById(item.EmployeeID));
             }
             ViewBag.EmployeeOfMoviesSeries = employees;
-            ViewBag.AllComment = _ratingService.GetCommentByUserAndMovieWithInclude(id,"User", "RatingOfMovieSeries");
+
+            _moviesSeriesService.Update(moviesSeries);
+            
             return View(_moviesSeriesService.GetMoviesSeriesById(id));
         }
 
