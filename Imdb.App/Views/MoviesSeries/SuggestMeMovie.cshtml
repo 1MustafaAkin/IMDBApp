@@ -43,79 +43,70 @@
                             }
                         </div>*@
 
-                    <div class="movie-rate">
-                        <div class="rate">
-                            <i class="ion-android-star"></i> @*TODO (filmin ratint değeri buraya databaseden çekilecek)*@
-                            <p>
-                                @*<span>@Url.Content(Model.Ratings)</span> /10<br>*@
-                                @*<span class="rv">56 Reviews</span>*@
-                            </p>
+                    <div class="progress" style="height:50px;">
+                        <div class="progress" style="height:5em;">
+                            <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 79%;" aria-valuenow="79" aria-valuemin="0" aria-valuemax="100">7.9</div>
                         </div>
-                        <div class="rate-star">
-                            <p>Rate This Movie:  </p>
-                            <form id="user-rating-form">
-                                @* TODO buraya çekerken oylanan sayı kadar user-rating clası bass *@
-                                <span class="user-rating" style="width:275px">
-                                    @if (ViewBag.rating == null)
-                                    {
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="10"><span class="star"></span>
+                        @*<div class="rate-star">
+                                <p>Rate This Movie:  </p>
+                                <form id="user-rating-form">
 
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="9"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="8"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="7"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="6"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="5"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="4"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="3"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="2"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="1"><span class="star"></span>
-                                    }
-                                    else
-                                    {
-                                        var s = ViewBag.rating;
-                                        for (int i = 1; i <= 10; i++)
+                                    <span class="user-rating" style="width:275px">
+                                        @if (ViewBag.rating == null)
                                         {
-                                            if (i > 10 - s.Score)
-                                            {
-                                                <input type="radio" checked name="rating+'@i'" value="@i"><span class="star"></span>
-                                            }
-                                            else
-                                            {
-                                                <input type="radio" name="rating" value="@i"><span class="nostar"></span>
-                                            }
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="10"><span class="star"></span>
 
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="9"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="8"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="7"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="6"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="5"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="4"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="3"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="2"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="1"><span class="star"></span>
                                         }
-                                    }
+                                        else
+                                        {
+                                            var s = ViewBag.rating;
+                                            for (int i = 1; i <= 10; i++)
+                                            {
+                                                if (i > 10 - s.Score)
+                                                {
+                                                    <input type="radio" checked name="rating+'@i'" value="@i"><span class="star"></span>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="rating" value="@i"><span class="nostar"></span>
+                                                }
 
-                                </span>
+                                            }
+                                        }
 
-                            </form>
-                            @if (ViewBag.rating == null)
-                            {
-                                <button type="button" style="float:right" class="btn btn-danger" id="btnVote">Vote</button>
-                            }
-                            else
-                            {
-                                <button type="button" disabled style="float:right" class="btn btn-danger" id="btnVote">Vote</button>
-                            }
-                        </div>
+                                    </span>
+
+                                </form>
+                                @if (ViewBag.rating == null)
+                                {
+                                    <button type="button" style="float:right" class="btn btn-danger" id="btnVote">Vote</button>
+                                }
+                                else
+                                {
+                                    <button type="button" disabled style="float:right" class="btn btn-danger" id="btnVote">Vote</button>
+                                }
+                            </div>*@
                     </div>
-                    <div class="movie-tabs">
+
+                    <div class="movie-tabs" style="margin-top:20px;">
                         <div class="tabs">
-                            @*<ul class="tab-links tabs-mv tabs-series">
-                                    <li class="active"><a href="#overview">Overview</a></li>
-                                    <li id="review"><a href="#reviews"> Reviews</a></li>
-                                    <li><a href="#season"> Season</a></li>
-                                    <li><a href="#moviesrelated"> Related Shows</a></li>
-                                </ul>*@
                             <div class="tab-content">
                                 <div class="tab active" id="overview">
                                     <div class="row">
@@ -124,94 +115,25 @@
                                         </div>
                                         <div class="col-md-8 col-sm-12 col-xs-12">
                                             <p>@Url.Content(Model.Description)</p>
-                                            @*<div class="title-hd-sm">
-                                                    <h4>Current Season</h4>
-                                                    <a class="time" href="#">View All Seasons <i class="ion-ios-arrow-right"></i></a>
-                                                </div>*@
-                                            <!-- movie cast -->
-                                            @*<div class="mvcast-item">
-                                                    <div class="cast-it">
-                                                        <div class="cast-left series-it">
-                                                            <img alt="" src="images/uploads/season.jpg">
-                                                            <div>
-                                                                <a href="#">Season 10</a>
-                                                                <p>21 Episodes</p>
-                                                                <p>
-                                                                    Season 10 of The Big Bang Theory premiered on
-                                                                    September 19, 2016.
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>*@
-                                            @*<div class="title-hd-sm">
-                                                    <h4>Videos &amp; Photos</h4>
-                                                    <a class="time" href="#">All 5 Videos &amp; 245 Photos <i class="ion-ios-arrow-right"></i></a>
-                                                </div>*@
-                                            @*<div class="mvsingle-item ov-item">
-                                                    <a class="img-lightbox" href="images/uploads/image41.jpg" data-fancybox-group="gallery"><img alt="" src="images/uploads/image4.jpg"></a>
-                                                    <a class="img-lightbox" href="images/uploads/image51.jpg" data-fancybox-group="gallery"><img alt="" src="images/uploads/image5.jpg"></a>
-                                                    <a class="img-lightbox" href="images/uploads/image61.jpg" data-fancybox-group="gallery"><img alt="" src="images/uploads/image6.jpg"></a>
-                                                    <div class="vd-it">
-                                                        <img class="vd-img" alt="" src="images/uploads/image7.jpg">
-                                                        <a class="fancybox-media hvr-grow" href="https://www.youtube.com/embed/o-0hcF97wy0" rel="playlist"><img alt="" src="images/uploads/play-vd.png"></a>
-                                                    </div>
-                                                </div>*@
-                                            <div class="title-hd-sm">
-                                                <h4>cast</h4>
-                                                @*<a class="time" href="#">Full Cast &amp; Crew  <i class="ion-ios-arrow-right"></i></a>*@
-                                            </div>
+                                     
                                             <div class="mvcast-item">
                                                 @*//TODO: buraya filmin oyuncularının ismi databaseden çekilecek.*@
-                                                @foreach (var item in ViewBag.EmployeeOfMoviesSeries)
-                                                {
-                                                    <div class="cast-it">
-                                                        <div class="cast-left">
-                                                            <img alt="" src="images/uploads/cast1.jpg">
-                                                            <a href="#">@item.FirstName @item.LastName</a>
+                                                @*@foreach (var item in ViewBag.EmployeeOfMoviesSeries)
+                                                    {
+                                                        <div class="cast-it">
+                                                            <div class="cast-left">
+                                                                <img alt="" src="images/uploads/cast1.jpg">
+                                                                <a href="#">@item.FirstName @item.LastName</a>
+                                                            </div>
+                                                            <p>@item.FirstName @item.LastName</p>
                                                         </div>
-                                                        <p>@item.FirstName @item.LastName</p>
-                                                    </div>
-                                                }
+                                                    }*@
                                             </div>
                                             @*<div class="title-hd-sm">
                                                     <h4>User reviews</h4>
                                                     <a class="time" href="#">See All 56 Reviews <i class="ion-ios-arrow-right"></i></a>
                                                 </div>*@
-                                            <!-- movie user review -->
-                                            <div class="mv-user-review-item">
 
-                                                @*<div class="no-star">
-                                                        <form id="user-rating-form">
-                                                            <span class="user-rating" style="width:275px">
-                                                                <input type="radio" name="rating" value="10"><span class="nostar"></span>
-
-                                                                <input type="radio" name="rating" value="9"><span class="nostar"></span>
-
-                                                                <input type="radio" name="rating" value="8"><span class="nostar"></span>
-
-                                                                <input type="radio" name="rating" value="7"><span class="nostar"></span>
-
-                                                                <input type="radio" name="rating" value="6"><span class="nostar"></span>
-
-                                                                <input type="radio" name="rating" value="5"><span class="nostar"></span>
-
-                                                                <input type="radio" name="rating" value="4"><span class="nostar"></span>
-
-                                                                <input type="radio" name="rating" value="3"><span class="nostar"></span>
-
-                                                                <input type="radio" name="rating" value="2"><span class="nostar"></span>
-
-                                                                <input type="radio" name="rating" value="1"><span class="nostar"></span>
-                                                            </span>
-                                                        </form>
-                                                    </div>*@
-                                                @*<p class="time">
-
-                                                        17 December 2016 by <a href="#"> hawaiipierson</a>
-                                                    </p>*@
-                                                <p></p>
-                                            </div>
                                         </div>
                                         <div class="col-md-4 col-xs-12 col-sm-12">
                                             <div class="sb-it">
@@ -275,36 +197,36 @@
                                                 <option value="saab">-- Choose option 2--</option>
                                             </select>
                                         </div>
-                                        @{
-                                            foreach (var item in ViewBag.AllComment)
-                                            {
+                                        @*@{
+                                                foreach (var item in ViewBag.AllComment)
+                                                {
 
-                                                <div class="mv-user-review-item">
-                                                    <div class="user-infor">
-                                                        <img src="@Url.Content(item.User.Avatar)" alt="">
-                                                        <div>
-                                                            <span class="no-star">
-                                                                @for (int j = 10; j >= 1; j--)
-                                                                {
-                                                                    if (j <= 10 - item.Score)
+                                                    <div class="mv-user-review-item">
+                                                        <div class="user-infor">
+                                                            <img src="@Url.Content(item.User.Avatar)" alt="">
+                                                            <div>
+                                                                <span class="no-star">
+                                                                    @for (int j = 10; j >= 1; j--)
                                                                     {
-                                                                        <i class="ion-android-star last"></i>
+                                                                        if (j <= 10 - item.Score)
+                                                                        {
+                                                                            <i class="ion-android-star last"></i>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <i class="ion-android-star"></i>
+                                                                        }
                                                                     }
-                                                                    else
-                                                                    {
-                                                                        <i class="ion-android-star"></i>
-                                                                    }
-                                                                }
-                                                            </span>
-                                                            <p class="time">
-                                                                @DateTime.Now.ToShortDateString() <a href="#">@item.User.UserName</a>
-                                                            </p>
+                                                                </span>
+                                                                <p class="time">
+                                                                    @DateTime.Now.ToShortDateString() <a href="#">@item.User.UserName</a>
+                                                                </p>
+                                                            </div>
                                                         </div>
+                                                        <p>@item.Comment</p>
                                                     </div>
-                                                    <p>@item.Comment</p>
-                                                </div>
-                                            }
-                                        }
+                                                }
+                                            }*@
 
 
                                         <div class="topbar-filter">

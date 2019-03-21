@@ -52,13 +52,13 @@
                         @* alta kaç adet film varsa dinamik basılacak *@
                         <p>Found <span>@Model.TotalItemCount</span> in total</p>
                         <label>Sort by:</label>
-                        <select>
-                            <option value="popularity">Popularity Descending</option>
-                            <option value="popularity">Popularity Ascending</option>
-                            <option value="rating">Rating Descending</option>
-                            <option value="rating">Rating Ascending</option>
-                            <option value="date">Release date Descending</option>
-                            <option value="date">Release date Ascending</option>
+                        <select id="orderList">
+                            <option id="nameDesc" value="nameDesc">Name Descending</option>
+                            <option id="nameAsc" value="nameAsc">Name Ascending</option>
+                            <option value="ratingDesc">Rating Descending</option>
+                            <option value="ratingAsc">Rating Ascending</option>
+                            <option value="dateDesc">Release date Descending</option>
+                            <option value="dateAsc">Release date Ascending</option>
                         </select>
                         <a href="movielist.html" class="list"><i class="ion-ios-list-outline "></i></a>
                         <a href="moviegridfw.html" class="grid"><i class="ion-grid active"></i></a>
@@ -92,8 +92,7 @@
                         <div class="pagination2">
                             @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-                            @Html.PagedListPager(Model, page => Url.Action("ListOfMovies", "MoviesSeries",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                            @Html.PagedListPager(Model, page => Url.Action("ListOfMovies", "MoviesSeries", new { sortOrder = ViewBag.CurrentSort , page }))
                         </div>
                     </div>
                 </div>
@@ -104,3 +103,16 @@
 
 </body>
 </html>
+
+@section scripts{
+    <script> 
+        $('#orderList').on('change', function () {
+            var sortOrder = $(this).val();
+            $.ajax({
+                url: "/MoviesSeries/ListOfMovies/",
+                type: "POST",
+                data: { sortOrder: sortOrder}
+            });
+        });
+    </script>
+}

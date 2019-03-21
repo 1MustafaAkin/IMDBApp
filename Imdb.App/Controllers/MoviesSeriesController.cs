@@ -143,48 +143,45 @@ namespace Imdb.App.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ListOfMovies(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult ListOfMovies(string sortOrder, int? page)
         {
+            if (sortOrder == null)
+                sortOrder = "nameDesc";
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc": "Date";
 
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
+            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            //ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc": "Date";
 
-            ViewBag.CurrentFilter = searchString;
-            var movies = _moviesSeriesService.GetMoviesSeriesByIsMovies();
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                movies = movies.Where(s => s.MovieSeriesName.Contains(searchString));
+            //if (searchString != null)
+            //{
+            //    page = 1;
+            //}
+            //else
+            //{
+            //    searchString = currentFilter;
+            //}
 
-            }
+            //ViewBag.CurrentFilter = searchString;
+            var movies = _moviesSeriesService.GetMoviesSeriesByIsMovies().OrderByDescending(x => x.MovieSeriesName);
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    movies = movies.Where(s => s.MovieSeriesName.Contains(searchString));
+
+            //}
             switch (sortOrder)
             {
-                case "name_desc":
-                    movies = movies.OrderByDescending(s => s.MovieSeriesName);
+                case "nameDesc":
+                    movies = _moviesSeriesService.GetMoviesSeriesByIsMovies().OrderByDescending(x => x.MovieSeriesName);
                     break;
-                case "Date":
-                    movies = movies.OrderBy(s => s.ReleaseDate);
-                    break;
-                case "date_desc":
-                    movies = movies.OrderByDescending(s => s.ReleaseDate);
-                    break;
-                default:  //Name ascending
-                    movies = movies.OrderBy(s => s.MovieSeriesName);
+                case "nameAsc":
+                    movies = _moviesSeriesService.GetMoviesSeriesByIsMovies().OrderBy(x => x.MovieSeriesName);
                     break;
             }
 
             int pageSize = 5;
             int pageNumber = (page ?? 1);
 
-            return View(_moviesSeriesService.GetMoviesSeriesByIsMovies().ToPagedList(pageNumber, pageSize));
+            return View(movies.ToPagedList(pageNumber, pageSize));
         }
     
 
@@ -334,33 +331,15 @@ namespace Imdb.App.Controllers
 
         public ActionResult SuggestMeMovie()
         {
-            int id;
-            id = 1;
-            //Random rnd = new Random();
-            //MoviesSeries movies_max_id = _moviesSeriesService.maxid();
-            //int max_id = movies_max_id;
-            //id = rnd.Next(1,max_id);            
+            Random random = new Random();
+           
             User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
-            List<MoviesSeriesEmployee> employeesOfMoviesSeries = _moviesSeriesEmployeeService.GetEmployeeByMoviesSeriesId(id);
-            List<MoviesSeriesWatchList> moviesSeriesWatchList = _moviesSeriesWatchListService.GetMoviesSeriesWatchListByWatchList(user.UserID);
-            Rating rating = _ratingService.GetScoreByUserAndMovie(user.UserID, id);
-            ViewBag.rating = rating;
-            ViewBag.comment = _ratingService.GetCommentByUserAndMovie(user.UserID, id);
-
-            count = moviesSeriesWatchList.Where(x => x.MoviesSeriesID == id).ToList().Count();
-            if (count != 0)
-                ViewBag.DoesExistMovieInWatchList = true;
-            else
-                ViewBag.DoesExistMovieInWatchList = false;
-
-            employees = new List<Employee>();
-            foreach (var item in employeesOfMoviesSeries)
-            {
-                employees.Add(_employeeService.GetEmployeeById(item.EmployeeID));
-            }
-            ViewBag.EmployeeOfMoviesSeries = employees;
-            ViewBag.AllComment = _ratingService.GetCommentByUserAndMovieWithInclude(id, "User", "RatingOfMovieSeries");
-            return View(_moviesSeriesService.GetMoviesSeriesById(id));
+            //Rating rating = _ratingService.GetScoreByUserAndMovie(user.UserID, id);
+            //ViewBag.rating = rating;
+            List<MoviesSeries> SuggestMovie = _moviesSeriesService.GetAll();
+            int rnd = random.Next(0, SuggestMovie.Count-1);
+            MoviesSeries moviesSeries = SuggestMovie[rnd]; 
+            return View(moviesSeries);
         }
     }
 }
