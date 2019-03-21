@@ -1,0 +1,38 @@
+﻿@model Imdb.DATA.Concrete.News
+@{
+    ViewBag.Title = "NewsDetails";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="hero common-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="hero-ct">
+                    <h1> blog detail</h1>
+                    <ul class="breadcumb">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li> <span class="ion-ios-arrow-right"></span> blog listing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12 col-xs-12">
+                <div class="blog-detail-ct">
+                    <h1>@Model.NewsTitle</h1>
+
+                    <img src="@Url.Content(Model.NewsPhoto)" style="width:870px;height:470px;" alt="">
+                </div>
+                <p class="uzunHali">
+                    @Model.NewsContent
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
