@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Imdb.DATA.Concrete.News>
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.IPagedList<Imdb.DATA.Concrete.News>
+
 @{
     ViewBag.Title = "ListOfNews";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -41,17 +44,11 @@
                     }
                 }
 
-                <ul class="pagination">
-                    <li class="icon-prev"><a href="#"><i class="ion-ios-arrow-left"></i></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">...</a></li>
-                    <li><a href="#">21</a></li>
-                    <li><a href="#">22</a></li>
-                    <li class="icon-next"><a href="#"><i class="ion-ios-arrow-right"></i></a></li>
-                </ul>
+                        <ul class="pagination">
+                            @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                            @Html.PagedListPager(Model, page => Url.Action("ListOfNews", "News", new { page }))
+                        </ul>
             </div>
             <div class="col-md-3 col-sm-12 col-xs-12">
                 <div class="sidebar">

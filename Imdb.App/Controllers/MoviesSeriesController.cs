@@ -185,9 +185,13 @@ namespace Imdb.App.Controllers
         }
     
 
-        public ActionResult ListOfSeries()
+        public ActionResult ListOfSeries(int? page)
         {
-            return View(_moviesSeriesService.GetMoviesSeriesByIsSeries());
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            return View(_moviesSeriesService.GetMoviesSeriesByIsSeries().ToPagedList(pageNumber, pageSize));
         }
 
         List<Employee> employees;
