@@ -2,14 +2,24 @@
 @using Imdb.DATA.Concrete
 @{
     ViewBag.Title = "Register";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 
+<div class="heroo sr-single-hero2 sr-single">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+    </div>
+</div>
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", @style = "margin-top:100px" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
+     <div class="header" style="margin-left:180px;">
+      <h4>Create a new account.</h4>
+     </div>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
