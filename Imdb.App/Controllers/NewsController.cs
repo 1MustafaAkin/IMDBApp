@@ -12,7 +12,7 @@ using Imdb.BLL.Abstract;
 using Imdb.BLL.DependencyResolver.Ninject;
 using Imdb.DAL;
 using Imdb.DATA.Concrete;
-
+using PagedList;
 namespace Imdb.App.Controllers
 {
     public class NewsController : Controller
@@ -134,7 +134,12 @@ namespace Imdb.App.Controllers
 
         public ActionResult ListOfNews()
         {
-            return View(_newsService.GetNewsById(1));
+            return View(_newsService.GetAll());
         }
+        public ActionResult NewsDetails(int id)
+        {
+            return View(_newsService.GetNewsById(id));
+        }
+
     }
 }

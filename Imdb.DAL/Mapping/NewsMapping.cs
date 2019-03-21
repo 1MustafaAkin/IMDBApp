@@ -15,7 +15,7 @@ namespace Imdb.DAL.Mapping
             HasKey(x=>x.NewsID);
 
             Property(x => x.NewsTitle).HasMaxLength(80).IsRequired();
-            Property(x => x.NewsContent).HasMaxLength(1000).IsRequired();
+            Property(x => x.NewsContent).HasMaxLength(3000).IsRequired();
             Property(x => x.NewsPhoto).HasMaxLength(250).IsRequired();
         }
     }
