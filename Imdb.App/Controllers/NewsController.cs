@@ -132,12 +132,9 @@ namespace Imdb.App.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ListOfNews(int? page)
+        public ActionResult ListOfNews()
         {
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-
-            return View(_newsService.GetAll().ToPagedList(pageNumber, pageSize));
+            return View(_newsService.GetAll());
         }
         public ActionResult NewsDetails(int id)
         {

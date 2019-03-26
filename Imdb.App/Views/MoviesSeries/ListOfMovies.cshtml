@@ -5,7 +5,8 @@
     ViewBag.Title = "ListOfMovies";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
-
+<!--Yapılacaklar: Tüm film sayısı dinamik yazılacak, sayfalama işleri yapılacak, filmler ilgili filmin sayfasına gönderecek. SortBy düzenlenecek. Görünüm türü düzenlenecek.
+    push etmek için değişiklik.-->
 <!DOCTYPE html>
 
 <html lang="en" class="no-js">
@@ -48,7 +49,7 @@
 
                     <div class="topbar-filter fw">
 
-                        
+                        @* alta kaç adet film varsa dinamik basılacak *@
                         <p>Found <span>@Model.TotalItemCount</span> in total</p>
                         <label>Sort by:</label>
                         <select id="orderList">
@@ -91,7 +92,7 @@
                     <div class="topbar-filter">
                         <label>Movies per page:</label>
                         <select>
-                            <option value="range">5 Movies</option>
+                            <option value="range">20 Movies</option>
                             <option value="saab">10 Movies</option>
                         </select>
 

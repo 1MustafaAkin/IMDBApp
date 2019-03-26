@@ -185,13 +185,9 @@ namespace Imdb.App.Controllers
         }
     
 
-        public ActionResult ListOfSeries(int? page)
+        public ActionResult ListOfSeries()
         {
-
-            int pageSize = 5;
-            int pageNumber = (page ?? 1);
-
-            return View(_moviesSeriesService.GetMoviesSeriesByIsSeries().ToPagedList(pageNumber, pageSize));
+            return View(_moviesSeriesService.GetMoviesSeriesByIsSeries());
         }
 
         List<Employee> employees;
@@ -200,12 +196,18 @@ namespace Imdb.App.Controllers
         {
             User user = _userService.GetUsersByUserName(User.Identity.GetUserName());
             List<MoviesSeriesEmployee> employeesOfMoviesSeries = _moviesSeriesEmployeeService.GetEmployeeByMoviesSeriesId(id);
-            List<MoviesSeriesWatchList> moviesSeriesWatchList = _moviesSeriesWatchListService.GetMoviesSeriesWatchListByWatchList(user.UserID);
-            Rating rating = _ratingService.GetScoreByUserAndMovie(user.UserID,id);
+            
             MoviesSeries moviesSeries = _moviesSeriesService.GetMoviesSeriesById(id);
 
-            ViewBag.rating = rating;
-            ViewBag.comment = _ratingService.GetCommentByUserAndMovie(user.UserID,id);
+            if(user != null)
+            {
+                List<MoviesSeriesWatchList> moviesSeriesWatchList = _moviesSeriesWatchListService.GetMoviesSeriesWatchListByWatchList(user.UserID);
+                Rating rating = _ratingService.GetScoreByUserAndMovie(user.UserID, id);
+                ViewBag.rating = rating;
+                ViewBag.comment = _ratingService.GetCommentByUserAndMovie(user.UserID, id);
+                count = moviesSeriesWatchList.Where(x => x.MoviesSeriesID == id).ToList().Count();
+            }
+
             ViewBag.AllComment = _ratingService.GetCommentByUserAndMovieWithInclude(id, "User", "RatingOfMovieSeries");
 
             int score=0;
@@ -215,11 +217,18 @@ namespace Imdb.App.Controllers
             {
                 score += item.Score;
             }
-
-            averageImdb = (decimal)score / ratingCount;
+            if(ratingCount > 0 && score >0)
+            {
+                averageImdb = (decimal)score / ratingCount;
+            }
+            else
+            {
+                averageImdb = 0;
+            }
+           
             moviesSeries.AverageRating = Decimal.Round(averageImdb,1);
 
-            count = moviesSeriesWatchList.Where(x=>x.MoviesSeriesID == id).ToList().Count();
+            
             if (count != 0)
                 ViewBag.DoesExistMovieInWatchList = true;
             else

@@ -1,13 +1,10 @@
-﻿@using PagedList.Mvc;
-@using PagedList;
-@model PagedList.IPagedList<Imdb.DATA.Concrete.MoviesSeries>
-
+﻿
 @{
     ViewBag.Title = "ListOfSeries";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-
+<!--Yapılacaklar: Tüm dizi sayısı dinamik yazılacak, sayfalama işleri yapılacak, diziler ilgili filmin sayfasına gönderecek. SortBy düzenlenecek. Görünüm türü düzenlenecek.-->
 <!DOCTYPE html>
 
 <html lang="en" class="no-js">
@@ -50,8 +47,8 @@
 
                     <div class="topbar-filter fw">
 
-                       
-                        <p>Found <span>@Model.TotalItemCount</span> in total</p>
+                        @* alta kaç adet film varsa dinamik basılacak *@
+                        <p>Found <span>1,608 movies</span> in total</p>
                         <label>Sort by:</label>
                         <select>
                             <option value="popularity">Popularity Descending</option>
@@ -93,14 +90,19 @@
                     <div class="topbar-filter">
                         <label>Movies per page:</label>
                         <select>
-                            <option value="range">5 Series</option>
+                            <option value="range">20 Movies</option>
                             <option value="saab">10 Movies</option>
                         </select>
 
                         <div class="pagination2">
-                            @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-                            @Html.PagedListPager(Model, page => Url.Action("ListOfSeries", "MoviesSeries", new { page }))
+                            <span>Page 1 of 2:</span>
+                            <a class="active" href="#">5135</a>
+                            <a href="#">2</a>
+                            <a href="#">6</a>
+                            <a href="#">...</a>
+                            <a href="#">78</a>
+                            <a href="#">79</a>
+                            <a href="#"><i class="ion-arrow-right-b"></i></a>
                         </div>
                     </div>
                 </div>

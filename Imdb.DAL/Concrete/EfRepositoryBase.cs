@@ -72,7 +72,7 @@ namespace Imdb.DAL.Concrete
                 //Burda filter gelebeilecek linq sorgusuna göre çekeblirizi 
                 //return db.User.SingleOrDefault(filter);
 
-                return db.Set<TEntity>().SingleOrDefault(filter);
+                return db.Set<TEntity>().FirstOrDefault(filter);
             }
         }
 

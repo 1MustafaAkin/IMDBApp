@@ -46,7 +46,7 @@
                         @{
                             if (ViewBag.DoesExistMovieInWatchList)
                             {
-                                <span class="parent-btn" href="#"><i class="ion-android-lock"></i> Movie Added To List</span>
+                                <span style="color:red" class="parent-btn" href="#"><i class="ion-android-lock"></i> Movie Already Aded</span>
                             }
                             else
                             {
@@ -63,62 +63,66 @@
                                 @String.Format("{0:0.0}", @Model.AverageRating)
                             </p>
                         </div>
-                        <div class="rate-star">
-                            <p>Rate This Movie:  </p>
-                            <form id="user-rating-form">
-                                @* TODO buraya çekerken oylanan sayı kadar user-rating clası bass *@
-                                <span class="user-rating" style="width:275px">
-                                    @if (ViewBag.rating == null)
-                                    {
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="10"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="9"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="8"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="7"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="6"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="5"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="4"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="3"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="2"><span class="star"></span>
-
-                                        <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="1"><span class="star"></span>
-                                    }
-                                    else
-                                    {
-                                        var s = ViewBag.rating;
-                                        for (int i = 1; i <= 10; i++)
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="rate-star">
+                                <p>Rate This Movie:  </p>
+                                <form id="user-rating-form">
+                                    @* TODO buraya çekerken oylanan sayı kadar user-rating clası bass *@
+                                    <span class="user-rating" style="width:275px">
+                                        @if (ViewBag.rating == null)
                                         {
-                                            if (i > 10 - s.Score)
-                                            {
-                                                <input type="radio" checked name="rating+'@i'" value="@i"><span class="star"></span>
-                                            }
-                                            else
-                                            {
-                                                <input type="radio" name="rating" value="@i"><span class="nostar"></span>
-                                            }
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="10"><span class="star"></span>
 
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="9"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="8"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="7"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="6"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="5"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="4"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="3"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="2"><span class="star"></span>
+
+                                            <input type="radio" name="rating" data-mid="@Model.MovieSeriesID" value="1"><span class="star"></span>
                                         }
-                                    }
+                                        else
+                                        {
+                                            var s = ViewBag.rating;
+                                            for (int i = 1; i <= 10; i++)
+                                            {
+                                                if (i > 10 - s.Score)
+                                                {
+                                                    <input type="radio" checked name="rating+'@i'" value="@i"><span class="star"></span>
+                                                }
+                                                else
+                                                {
+                                                    <input type="radio" name="rating" value="@i"><span class="nostar"></span>
+                                                }
 
-                                </span>
+                                            }
+                                        }
 
-                            </form>
-                            @if (ViewBag.rating == null)
-                            {
-                                <button type="button" style="float:right" class="btn btn-danger" id="btnVote">Vote</button>
-                            }
-                            else
-                            {
-                                <button type="button" disabled style="float:right" class="btn btn-danger" id="btnVote">Vote</button>
-                            }
-                        </div>
+                                    </span>
+
+                                </form>
+                                @if (ViewBag.rating == null)
+                                {
+                                    <button type="button" style="float:right" class="btn btn-danger" id="btnVote">Vote</button>
+                                }
+                                else
+                                {
+                                    <button type="button" disabled style="float:right" class="btn btn-danger" id="btnVote">Vote</button>
+                                }
+                            </div>
+                        }
+
                     </div>
                     <div class="movie-tabs">
                         <div class="tabs">
@@ -337,15 +341,19 @@
                                         {
                                             if (ViewBag.comment == null)
                                             {
-                                                <div id="comment">
-                                                    <div>
-                                                        <strong style="color:#dd003f">Yorumunuz:</strong>
-                                                        <textarea rows="2" id="txtComment" style="resize:none" data-mid="@Model.MovieSeriesID" name="comment" class="form-control"></textarea>
+                                                if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <div id="comment">
+                                                        <div>
+                                                            <strong style="color:#dd003f">Yorumunuz:</strong>
+                                                            <textarea rows="2" id="txtComment" style="resize:none" data-mid="@Model.MovieSeriesID" name="comment" class="form-control"></textarea>
+                                                        </div>
+                                                        <div style="text-align:center">
+                                                            <input style="margin-top:10px; width:200px" type="submit" id="btnComment" class="btn btn-danger" value="COMMENT" />
+                                                        </div>
                                                     </div>
-                                                    <div style="text-align:center">
-                                                        <input style="margin-top:10px; width:200px" type="submit" id="btnComment" class="btn btn-danger" value="COMMENT" />
-                                                    </div>
-                                                </div>
+                                                }
+
                                             }
 
                                         }
@@ -612,7 +620,10 @@
                 url: "/MoviesSeries/VoteMoviesSeries/",
                 type: "POST",
                 data: { id: moviesSeriesId, rate: rate }
-            });
+            }).then(function () {
+                window.location.reload();
+            })
+            
             $("#btnVote").attr("disabled", true);
         })
     });
